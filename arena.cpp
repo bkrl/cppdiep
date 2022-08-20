@@ -10,6 +10,7 @@
 #include <Box2D/Dynamics/b2World.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 
+#include "b2_categories.h"
 #include "bullet.h"
 #include "render_utils.h"
 #include "tank.h"
@@ -29,6 +30,8 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
   border_fixture_def.shape = &border_chain;
   border_fixture_def.friction = 0.25f;
   border_fixture_def.restitution = 0.25f;
+  border_fixture_def.filter.categoryBits = b2_categories::BORDER;
+  border_fixture_def.filter.maskBits = b2_categories::TANK;
   border_body.CreateFixture(&border_fixture_def);
 }
 

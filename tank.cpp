@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "arena.h"
+#include "b2_categories.h"
 #include "render_utils.h"
 
 namespace dieprl {
@@ -36,6 +37,9 @@ Tank::Tank(Arena &arena, b2World &b2_world, const b2Vec2 &position,
   fixture_def.density = 1.f;
   fixture_def.friction = 0.3f;
   fixture_def.restitution = 0.25f;
+  fixture_def.filter.categoryBits = b2_categories::TANK;
+  fixture_def.filter.maskBits =
+      b2_categories::TANK | b2_categories::BORDER | b2_categories::BULLET;
   getB2Body().CreateFixture(&fixture_def);
 }
 
