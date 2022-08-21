@@ -1,5 +1,5 @@
-#ifndef DIEPRL_RENDER_UTILS_H
-#define DIEPRL_RENDER_UTILS_H
+#ifndef CPPDIEP_RENDER_UTILS_H
+#define CPPDIEP_RENDER_UTILS_H
 
 #include <numbers>
 
@@ -8,7 +8,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
 
-namespace dieprl {
+namespace cppdiep {
 
 inline constexpr float RENDER_SCALE = 64.f;
 
@@ -40,6 +40,6 @@ inline b2Vec2 convertVector(const sf::Vector2f &sf_vec) {
   return b2Vec2(sf_vec.x, sf_vec.y);
 }
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_RENDER_UTILS_H
+#endif // CPPDIEP_RENDER_UTILS_H

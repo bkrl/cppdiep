@@ -16,7 +16,7 @@
 #include "tank.h"
 #include "time.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 Arena::Arena(float size, float time_step) : time_step(time_step) {
   b2BodyDef border_body_def;
@@ -60,4 +60,4 @@ void Arena::step() {
   ++time;
 }
 
-} // namespace dieprl
+} // namespace cppdiep

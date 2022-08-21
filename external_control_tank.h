@@ -1,5 +1,5 @@
-#ifndef DIEPRL_EXTERNAL_CONTROL_TANK_H
-#define DIEPRL_EXTERNAL_CONTROL_TANK_H
+#ifndef CPPDIEP_EXTERNAL_CONTROL_TANK_H
+#define CPPDIEP_EXTERNAL_CONTROL_TANK_H
 
 #include <concepts>
 
@@ -7,7 +7,7 @@
 
 #include "tank.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 template <std::derived_from<Tank> BaseTank>
 class ExternalControlTank final : public BaseTank {
@@ -22,6 +22,6 @@ private:
   b2Vec2 target{0.f, 0.f};
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_EXTERNAL_CONTROL_TANK_H
+#endif // CPPDIEP_EXTERNAL_CONTROL_TANK_H

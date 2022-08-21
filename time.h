@@ -1,12 +1,12 @@
-#ifndef DIEPRL_TIME_H
-#define DIEPRL_TIME_H
+#ifndef CPPDIEP_TIME_H
+#define CPPDIEP_TIME_H
 
 #include <cstdint>
 
-namespace dieprl {
+namespace cppdiep {
 
 using Time = std::int64_t;
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_TIME_H
+#endif // CPPDIEP_TIME_H

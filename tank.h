@@ -1,5 +1,5 @@
-#ifndef DIEPRL_TANK_H
-#define DIEPRL_TANK_H
+#ifndef CPPDIEP_TANK_H
+#define CPPDIEP_TANK_H
 
 #include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Common/b2Math.h>
@@ -13,7 +13,7 @@
 #include "object.h"
 #include "render_utils.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 class Tank : public Object {
 public:
@@ -46,6 +46,6 @@ private:
   sf::Color color;
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_TANK_H
+#endif // CPPDIEP_TANK_H

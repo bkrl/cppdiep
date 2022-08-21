@@ -8,7 +8,7 @@
 #include "arena.h"
 #include "bullet.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 void BasicTank::drawCannons(sf::RenderTarget &target) const {
   float radius = getRadius();
@@ -27,4 +27,4 @@ void BasicTank::fire() {
                                  getB2Body().GetWorldCenter(), true);
 }
 
-} // namespace dieprl
+} // namespace cppdiep

@@ -9,7 +9,7 @@
 #include "b2_categories.h"
 #include "render_utils.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 namespace {
 b2BodyDef makeB2BodyDef(const b2Vec2 &position, const b2Vec2 &velocity) {
@@ -50,4 +50,4 @@ bool Bullet::shouldDestroy() const {
   return getArena().getTime() >= destroy_time;
 }
 
-} // namespace dieprl
+} // namespace cppdiep

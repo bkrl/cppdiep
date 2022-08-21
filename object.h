@@ -1,5 +1,5 @@
-#ifndef DIEPRL_OBJECT_H
-#define DIEPRL_OBJECT_H
+#ifndef CPPDIEP_OBJECT_H
+#define CPPDIEP_OBJECT_H
 
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>
@@ -8,7 +8,7 @@
 
 #include "arena.fwd.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 class Object {
 public:
@@ -36,6 +36,6 @@ private:
   b2Body &b2_body;
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_OBJECT_H
+#endif // CPPDIEP_OBJECT_H

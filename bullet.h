@@ -1,5 +1,5 @@
-#ifndef DIEPRL_BULLET_H
-#define DIEPRL_BULLET_H
+#ifndef CPPDIEP_BULLET_H
+#define CPPDIEP_BULLET_H
 
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>
@@ -12,7 +12,7 @@
 #include "render_utils.h"
 #include "time.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 class Bullet : public Object {
 public:
@@ -35,6 +35,6 @@ private:
   Time destroy_time;
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_BULLET_H
+#endif // CPPDIEP_BULLET_H

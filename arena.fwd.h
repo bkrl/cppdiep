@@ -1,10 +1,10 @@
-#ifndef DIEPRL_ARENA_FWD_H
-#define DIEPRL_ARENA_FWD_H
+#ifndef CPPDIEP_ARENA_FWD_H
+#define CPPDIEP_ARENA_FWD_H
 
-namespace dieprl {
+namespace cppdiep {
 
 class Arena;
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_ARENA_FWD_H
+#endif // CPPDIEP_ARENA_FWD_H

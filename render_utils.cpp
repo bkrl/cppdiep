@@ -5,7 +5,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-namespace dieprl {
+namespace cppdiep {
 
 void drawCircle(sf::RenderTarget &target, const b2Vec2 &position, float radius,
                 const sf::Color &color) {
@@ -18,4 +18,4 @@ void drawCircle(sf::RenderTarget &target, const b2Vec2 &position, float radius,
   target.draw(shape);
 }
 
-} // namespace dieprl
+} // namespace cppdiep

@@ -14,7 +14,7 @@
 int main() {
   sf::ContextSettings settings;
   settings.antialiasingLevel = 4;
-  sf::RenderWindow window(sf::VideoMode(800, 800), "DiepRL",
+  sf::RenderWindow window(sf::VideoMode(800, 800), "CppDiep",
                           sf::Style::Titlebar | sf::Style::Close, settings);
   constexpr int frame_rate = 60;
   window.setFramerateLimit(frame_rate);
@@ -22,14 +22,14 @@ int main() {
   sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(arena_size, -arena_size));
   window.setView(view);
 
-  dieprl::Arena arena(arena_size, 1.f / frame_rate);
-  auto &tank = arena.spawnTank<dieprl::ExternalControlTank<dieprl::BasicTank>>(
-      b2Vec2(0.f, 0.f), 1.f, dieprl::colors::BLUE);
-  arena.spawnTank<dieprl::ExternalControlTank<dieprl::BasicTank>>(
-      b2Vec2(0.f, 5.f), 1.f, dieprl::colors::RED);
+  cppdiep::Arena arena(arena_size, 1.f / frame_rate);
+  auto &tank = arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+      b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
+  arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+      b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {
-    b2Vec2 mouse_position = dieprl::convertVector(
+    b2Vec2 mouse_position = cppdiep::convertVector(
         window.mapPixelToCoords(sf::Mouse::getPosition(window)));
     tank.setTarget(mouse_position - tank.getPosition());
     sf::Event event;

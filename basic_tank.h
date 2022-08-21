@@ -1,11 +1,11 @@
-#ifndef DIEPRL_BASIC_TANK_H
-#define DIEPRL_BASIC_TANK_H
+#ifndef CPPDIEP_BASIC_TANK_H
+#define CPPDIEP_BASIC_TANK_H
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "tank.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 class BasicTank : public Tank {
 protected:
@@ -17,6 +17,6 @@ private:
   constexpr float getMoveForce() const override { return 15.f; }
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_BASIC_TANK_H
+#endif // CPPDIEP_BASIC_TANK_H

@@ -1,5 +1,5 @@
-#ifndef DIEPRL_ARENA_H
-#define DIEPRL_ARENA_H
+#ifndef CPPDIEP_ARENA_H
+#define CPPDIEP_ARENA_H
 
 #include "arena.fwd.h"
 
@@ -18,7 +18,7 @@
 #include "tank.h"
 #include "time.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 class Arena {
 public:
@@ -51,6 +51,6 @@ private:
   Time time = 0;
 };
 
-} // namespace dieprl
+} // namespace cppdiep
 
-#endif // DIEPRL_ARENA_H
+#endif // CPPDIEP_ARENA_H

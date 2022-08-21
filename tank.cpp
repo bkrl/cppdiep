@@ -14,7 +14,7 @@
 #include "b2_categories.h"
 #include "render_utils.h"
 
-namespace dieprl {
+namespace cppdiep {
 
 namespace {
 b2BodyDef makeB2BodyDef(const b2Vec2 &position) {
@@ -60,4 +60,4 @@ void Tank::drawCannon(sf::RenderTarget &target, float length, float width,
   target.draw(cannon_shape);
 }
 
-} // namespace dieprl
+} // namespace cppdiep
