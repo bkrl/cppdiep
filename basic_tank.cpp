@@ -10,9 +10,9 @@
 
 namespace dieprl {
 
-void BasicTank::drawBarrels(sf::RenderTarget &target) const {
+void BasicTank::drawCannons(sf::RenderTarget &target) const {
   float radius = getRadius();
-  drawBarrel(target, 2 * radius, radius, getTargetAngle());
+  drawCannon(target, 2 * radius, radius, getTargetAngle());
 }
 
 void BasicTank::fire() {

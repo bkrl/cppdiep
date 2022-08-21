@@ -44,20 +44,20 @@ Tank::Tank(Arena &arena, b2World &b2_world, const b2Vec2 &position,
 }
 
 void Tank::draw(sf::RenderTarget &target) const {
-  drawBarrels(target);
+  drawCannons(target);
   drawCircle(target, getPosition(), getRadius(), getColor());
 }
 
-void Tank::drawBarrel(sf::RenderTarget &target, float length, float width,
+void Tank::drawCannon(sf::RenderTarget &target, float length, float width,
                       float angle) const {
-  sf::RectangleShape barrel_shape(sf::Vector2f(length, width));
-  barrel_shape.setOrigin(0.f, width / 2.f);
-  barrel_shape.setPosition(convertVector(getPosition()));
-  barrel_shape.setFillColor(colors::BARREL);
-  barrel_shape.setOutlineThickness(OUTLINE_THICKNESS);
-  barrel_shape.setOutlineColor(darken(colors::BARREL));
-  barrel_shape.setRotation(radiansToDegrees(angle));
-  target.draw(barrel_shape);
+  sf::RectangleShape cannon_shape(sf::Vector2f(length, width));
+  cannon_shape.setOrigin(0.f, width / 2.f);
+  cannon_shape.setPosition(convertVector(getPosition()));
+  cannon_shape.setFillColor(colors::CANNON);
+  cannon_shape.setOutlineThickness(OUTLINE_THICKNESS);
+  cannon_shape.setOutlineColor(darken(colors::CANNON));
+  cannon_shape.setRotation(radiansToDegrees(angle));
+  target.draw(cannon_shape);
 }
 
 } // namespace dieprl

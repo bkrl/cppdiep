@@ -13,7 +13,7 @@ protected:
   void fire();
 
 private:
-  void drawBarrels(sf::RenderTarget &target) const override;
+  void drawCannons(sf::RenderTarget &target) const override;
   constexpr float getMoveForce() const override { return 15.f; }
 };
 

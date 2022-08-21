@@ -15,7 +15,7 @@ inline constexpr float RENDER_SCALE = 64.f;
 namespace colors {
 inline const sf::Color BLUE(0, 178, 225);
 inline const sf::Color RED(241, 78, 84);
-inline const sf::Color BARREL(153, 153, 153);
+inline const sf::Color CANNON(153, 153, 153);
 inline const sf::Color BACKGROUND(205, 205, 205);
 } // namespace colors
 
