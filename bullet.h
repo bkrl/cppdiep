@@ -29,7 +29,7 @@ protected:
 private:
   friend Arena;
 
-  bool shouldDestroy() const;
+  bool shouldDestroy() const override;
 
   sf::Color color;
   Time destroy_time;

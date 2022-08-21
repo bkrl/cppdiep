@@ -1,7 +1,9 @@
 #include "arena.h"
 
 #include <array>
+#include <concepts>
 #include <memory>
+#include <utility>
 
 #include <Box2D/Collision/Shapes/b2ChainShape.h>
 #include <Box2D/Common/b2Math.h>
@@ -37,23 +39,32 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
 
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
-  for (const std::unique_ptr<Bullet, Bullet::Deleter> &bullet : bullets) {
+  for (const ObjectPtr<Bullet> &bullet : bullets) {
     bullet->draw(target);
   }
-  for (const std::unique_ptr<Tank, Tank::Deleter> &tank : tanks) {
+  for (const ObjectPtr<Tank> &tank : tanks) {
     tank->draw(target);
   }
 }
 
-void Arena::step() {
-  while (!bullets.empty() && bullets.front()->shouldDestroy()) {
-    b2_world.DestroyBody(&bullets.front()->getB2Body());
-    bullets.pop_front();
+template <std::derived_from<Object> ObjectType>
+void Arena::cleanObjects(ObjectContainer<ObjectType> &objects) {
+  auto new_end = objects.end();
+  for (auto it = objects.rbegin(); it != objects.rend(); ++it) {
+    if ((*it)->shouldDestroy()) {
+      *it = std::move(*--new_end);
+    }
   }
-  for (const std::unique_ptr<Tank, Tank::Deleter> &tank : tanks) {
+  objects.erase(new_end, objects.end());
+}
+
+void Arena::step() {
+  cleanObjects(bullets);
+  cleanObjects(tanks);
+  for (const ObjectPtr<Tank> &tank : tanks) {
     tank->step();
   }
-  for (const std::unique_ptr<Bullet, Bullet::Deleter> &bullet : bullets) {
+  for (const ObjectPtr<Bullet> &bullet : bullets) {
     bullet->step();
   }
   b2_world.Step(time_step, 8, 3);

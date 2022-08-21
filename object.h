@@ -32,6 +32,8 @@ private:
     void operator()(Object *object) const { delete object; }
   };
 
+  virtual bool shouldDestroy() const = 0;
+
   Arena &arena;
   b2Body &b2_body;
 };

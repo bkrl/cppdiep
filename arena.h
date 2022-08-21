@@ -5,7 +5,6 @@
 
 #include <concepts>
 #include <cstdint>
-#include <deque>
 #include <memory>
 #include <vector>
 
@@ -44,8 +43,16 @@ public:
   Time getTime() const { return time; }
 
 private:
-  std::vector<std::unique_ptr<Tank, Tank::Deleter>> tanks;
-  std::deque<std::unique_ptr<Bullet, Bullet::Deleter>> bullets;
+  template <std::derived_from<Object> ObjectType>
+  using ObjectPtr = std::unique_ptr<ObjectType, typename ObjectType::Deleter>;
+  template <std::derived_from<Object> ObjectType>
+  using ObjectContainer = std::vector<ObjectPtr<ObjectType>>;
+
+  template <std::derived_from<Object> ObjectType>
+  static void cleanObjects(ObjectContainer<ObjectType> &objects);
+
+  ObjectContainer<Tank> tanks;
+  ObjectContainer<Bullet> bullets;
   b2World b2_world{b2Vec2(0.f, 0.f)};
   const float time_step;
   Time time = 0;
