@@ -25,6 +25,8 @@ int main() {
   dieprl::Arena arena(arena_size, 1.f / frame_rate);
   auto &tank = arena.spawnTank<dieprl::ExternalControlTank<dieprl::BasicTank>>(
       b2Vec2(0.f, 0.f), 1.f, dieprl::colors::BLUE);
+  arena.spawnTank<dieprl::ExternalControlTank<dieprl::BasicTank>>(
+      b2Vec2(0.f, 5.f), 1.f, dieprl::colors::RED);
 
   while (window.isOpen()) {
     b2Vec2 mouse_position = dieprl::convertVector(
