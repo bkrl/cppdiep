@@ -19,7 +19,7 @@ void BasicTank::fire() {
   b2Vec2 target_vec = getTarget();
   target_vec.Normalize();
   float bullet_radius = getRadius() / 2.f;
-  constexpr float impulse_magnitude = 10.f;
+  float impulse_magnitude = 10.f * getRadius();
   getArena().spawnBullet(
       getPosition() + (getRadius() + bullet_radius) * target_vec, getVelocity(),
       impulse_magnitude * target_vec, bullet_radius, getColor());

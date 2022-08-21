@@ -14,7 +14,7 @@ protected:
 
 private:
   void drawCannons(sf::RenderTarget &target) const override;
-  constexpr float getMoveForce() const override { return 15.f; }
+  float getMoveForce() const override { return 15.f * getRadius(); }
 };
 
 } // namespace cppdiep

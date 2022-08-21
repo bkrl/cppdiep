@@ -41,7 +41,7 @@ private:
   friend Arena;
 
   virtual void drawCannons(sf::RenderTarget &target) const = 0;
-  virtual constexpr float getMoveForce() const = 0;
+  virtual float getMoveForce() const = 0;
   bool shouldDestroy() const override { return false; }
 
   sf::Color color;
