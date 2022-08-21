@@ -7,10 +7,11 @@
 
 namespace cppdiep {
 
+/// A tank with a single cannon.
 class BasicTank : public Tank {
 protected:
   using Tank::Tank;
-  void fire();
+  void fire() override;
 
 private:
   void drawCannons(sf::RenderTarget &target) const override;

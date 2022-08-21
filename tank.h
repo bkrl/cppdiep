@@ -36,6 +36,7 @@ protected:
   void move(const b2Vec2 &vec) {
     getB2Body().ApplyForceToCenter(getMoveForce() * vec, true);
   }
+  virtual void fire() = 0;
 
 private:
   friend Arena;
