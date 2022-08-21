@@ -26,7 +26,7 @@ public:
     return std::atan2(target.y, target.x);
   }
   sf::Color getColor() const { return color; }
-  virtual void draw(sf::RenderTarget &target) const;
+  void draw(sf::RenderTarget &target) const override;
 
 protected:
   Tank(Arena &arena, b2World &b2_world, const b2Vec2 &position, float radius,
