@@ -23,8 +23,9 @@ int main() {
   window.setView(view);
 
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  auto &tank = arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
-      b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
+  auto &tank =
+      arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+          b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
   arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
