@@ -40,10 +40,10 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
 
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
-  // Bullets are drawn first so that they are underneath the tank barrels.
   for (const ObjectPtr<Object> &object : objects) {
     object->draw(target);
   }
+  // Tanks are drawn last so that their barrels are on top of other objects.
   for (const ObjectPtr<Tank> &tank : tanks) {
     tank->draw(target);
   }
