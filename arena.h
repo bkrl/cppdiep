@@ -90,7 +90,7 @@ private:
   /// @tparam ObjectType the type of the objects in the container to be cleaned.
   /// @param objects the container of objects to be cleaned.
   template <std::derived_from<Object> ObjectType>
-  static void cleanObjects(ObjectContainer<ObjectType> &objects);
+  void cleanObjects(ObjectContainer<ObjectType> &objects);
 
   /// Container of all of the tanks in the arena.
   ObjectContainer<Tank> tanks;

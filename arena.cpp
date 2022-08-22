@@ -56,6 +56,7 @@ void Arena::cleanObjects(ObjectContainer<ObjectType> &objects) {
   auto new_end = objects.end();
   for (auto it = objects.rbegin(); it != objects.rend(); ++it) {
     if ((*it)->shouldDestroy()) {
+      b2_world.DestroyBody(&(*it)->getB2Body());
       *it = std::move(*--new_end);
     }
   }
