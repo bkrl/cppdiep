@@ -1,6 +1,8 @@
 #ifndef CPPDIEP_TANK_H
 #define CPPDIEP_TANK_H
 
+#include <cmath>
+
 #include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>

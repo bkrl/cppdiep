@@ -1,7 +1,5 @@
 #include "basic_tank.h"
 
-#include <cmath>
-
 #include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 
