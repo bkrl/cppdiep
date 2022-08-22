@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(CppDiep LANGUAGES CXX)
+project(
+  CppDiep
+  DESCRIPTION "Diep.io reimplemented in C++ with SFML and Box2D"
+  LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
