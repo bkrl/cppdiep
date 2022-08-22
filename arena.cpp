@@ -39,6 +39,7 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
 
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
+  // Bullets are drawn first so that they are underneath the tank barrels.
   for (const ObjectPtr<Bullet> &bullet : bullets) {
     bullet->draw(target);
   }
@@ -49,6 +50,9 @@ void Arena::draw(sf::RenderTarget &target) const {
 
 template <std::derived_from<Object> ObjectType>
 void Arena::cleanObjects(ObjectContainer<ObjectType> &objects) {
+  // Replace objects that need to be destroyed with objects moved from the end
+  // of the vector. Iterating in reverse simplifies things since we don't have
+  // to worry about skipping over objects when removing an object.
   auto new_end = objects.end();
   for (auto it = objects.rbegin(); it != objects.rend(); ++it) {
     if ((*it)->shouldDestroy()) {

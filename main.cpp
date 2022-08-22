@@ -12,6 +12,7 @@
 #include "render_utils.h"
 
 int main() {
+  // Set up the window.
   sf::ContextSettings settings;
   settings.antialiasingLevel = 4;
   sf::RenderWindow window(sf::VideoMode(800, 800), "CppDiep",
@@ -19,9 +20,13 @@ int main() {
   constexpr int frame_rate = 60;
   window.setFramerateLimit(frame_rate);
   constexpr float arena_size = 20.f;
+  // The Y size of the view is negative to flip things vertically since SFML
+  // uses a downwards vertical axis while the arena uses an upwards vertical
+  // axis.
   sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(arena_size, -arena_size));
   window.setView(view);
 
+  // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
   auto &tank =
       arena.spawnTank<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
@@ -30,9 +35,12 @@ int main() {
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {
+    // Make the tank cannon point towards the mouse.
     b2Vec2 mouse_position = cppdiep::convertVector(
         window.mapPixelToCoords(sf::Mouse::getPosition(window)));
     tank.setTarget(mouse_position - tank.getPosition());
+
+    // Process events.
     sf::Event event;
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
@@ -54,6 +62,7 @@ int main() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
       tank.move(b2Vec2(1.f, 0.f));
     }
+
     arena.step();
     arena.draw(window);
     window.display();
