@@ -38,7 +38,7 @@ protected:
   /// the object's body.
   Object(Arena &arena, const b2BodyDef &b2_body_def);
 
-  /// Destruct an object.
+  /// Destruct an object and destroy the object's Box2D body.
   virtual ~Object();
 
   /// Advance the state of the object by one time step and return whether the
