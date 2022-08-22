@@ -19,7 +19,7 @@
 
 namespace cppdiep {
 
-/// @brief The Arena class manages all of the objects in the game.
+/// The Arena class manages all of the objects in the game.
 class Arena {
 public:
   /// Construct an arena.
