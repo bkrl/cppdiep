@@ -4,6 +4,7 @@
 #include <concepts>
 #include <memory>
 #include <utility>
+#include <vector>
 
 #include <Box2D/Collision/Shapes/b2ChainShape.h>
 #include <Box2D/Common/b2Math.h>
@@ -40,38 +41,27 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
   // Bullets are drawn first so that they are underneath the tank barrels.
-  for (const ObjectPtr<Bullet> &bullet : bullets) {
-    bullet->draw(target);
+  for (const ObjectPtr<Object> &object : objects) {
+    object->draw(target);
   }
   for (const ObjectPtr<Tank> &tank : tanks) {
     tank->draw(target);
   }
 }
 
-template <std::derived_from<Object> ObjectType>
-void Arena::cleanObjects(ObjectContainer<ObjectType> &objects) {
+void Arena::step() {
   // Replace objects that need to be destroyed with objects moved from the end
   // of the vector. Iterating in reverse simplifies things since we don't have
   // to worry about skipping over objects when removing an object.
   auto new_end = objects.end();
   for (auto it = objects.rbegin(); it != objects.rend(); ++it) {
-    if ((*it)->shouldDestroy()) {
-      b2_world.DestroyBody(&(*it)->getB2Body());
+    if ((*it)->step()) {
       *it = std::move(*--new_end);
     }
   }
   objects.erase(new_end, objects.end());
-}
-
-void Arena::step() {
-  cleanObjects(bullets);
-  cleanObjects(tanks);
-  for (const ObjectPtr<Tank> &tank : tanks) {
-    tank->step();
-  }
-  for (const ObjectPtr<Bullet> &bullet : bullets) {
-    bullet->step();
-  }
+  std::erase_if(tanks,
+                [](const ObjectPtr<Tank> &tank) { return tank->step(); });
   b2_world.Step(time_step, 8, 3);
   ++time;
 }

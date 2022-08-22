@@ -44,11 +44,10 @@ public:
 protected:
   /// Construct a Tank.
   /// @param arena the arena that contains the tank.
-  /// @param b2_world the Box2D world where the tank's body will be created.
   /// @param position the initial position of the tank.
   /// @param radius the radius of the tank's body.
   /// @param color the color of the tank.
-  Tank(Arena &arena, b2World &b2_world, const b2Vec2 &position, float radius,
+  Tank(Arena &arena, const b2Vec2 &position, float radius,
        const sf::Color &color);
 
   /// Helper function for drawing cannons.
@@ -80,12 +79,6 @@ private:
   /// Get the magnitude of the force used to move the tank.
   /// @param the magnitude of the force used to move the tank.
   virtual float getMoveForce() const = 0;
-
-  bool shouldDestroy() const override {
-    // Currently, tanks are never destroyed since health and damage have not
-    // been implemented.
-    return false;
-  }
 
   /// The color of the tank.
   sf::Color color;

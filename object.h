@@ -29,18 +29,23 @@ public:
 
 protected:
   /// Construct an object.
-  /// @param arena the arena that contains the object.
-  /// @param b2_world the Box2D world where the object's body will be created.
+  /// @param arena the arena that contains the object. The object will keep a
+  /// reference to the arena so the
   /// @param b2_body_def the Box2D body definition that will be used to create
   /// the object's body.
-  Object(Arena &arena, b2World &b2_world, const b2BodyDef &b2_body_def)
-      : arena(arena), b2_body(*b2_world.CreateBody(&b2_body_def)) {}
+  Object(Arena &arena, const b2BodyDef &b2_body_def);
 
   /// Destruct an object.
-  virtual ~Object() = default;
+  virtual ~Object();
 
-  /// The arena will call this method in each time step.
-  virtual void step() {}
+  /// Advance the state of the object by one time step and return whether the
+  /// object should be destroyed now.
+  /// @return Whether the object should be destroyed now.
+  virtual bool step() {
+    // Health and damage haven't been implemented yet so this just returns
+    // false.
+    return false;
+  }
 
   /// Get a reference to the arena that contains the object.
   /// @return A reference to the arena that contains the object.
@@ -61,10 +66,6 @@ private:
   struct Deleter {
     void operator()(Object *object) const { delete object; }
   };
-
-  /// Return whether the object should be destroyed now.
-  /// @return Whether the object should be destroyed now.
-  virtual bool shouldDestroy() const = 0;
 
   /// The arena that contains the object.
   Arena &arena;

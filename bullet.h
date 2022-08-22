@@ -28,22 +28,19 @@ public:
 protected:
   /// Construct a bullet.
   /// @param arena the arena that contains the bullet.
-  /// @param b2_world the Box2D world where the b2Body of the bullet will be
-  /// created.
   /// @param position the initial position of the bullet.
   /// @param velocity the initial velocity of the bullet.
   /// @param impulse the impulse applied to the bullet on top of the initial
   /// velocity.
   /// @param radius the radius of the bullet.
   /// @param color the color of the bullet.
-  Bullet(Arena &arena, b2World &b2_world, const b2Vec2 &position,
-         const b2Vec2 &velocity, const b2Vec2 &impulse, float radius,
-         const sf::Color &color);
+  Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
+         const b2Vec2 &impulse, float radius, const sf::Color &color);
+
+  bool step() override;
 
 private:
   friend Arena;
-
-  bool shouldDestroy() const override;
 
   /// The color of the bullet.
   sf::Color color;

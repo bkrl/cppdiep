@@ -24,10 +24,9 @@ b2BodyDef makeB2BodyDef(const b2Vec2 &position, const b2Vec2 &velocity) {
 }
 } // namespace
 
-Bullet::Bullet(Arena &arena, b2World &b2_world, const b2Vec2 &position,
-               const b2Vec2 &velocity, const b2Vec2 &impulse, float radius,
-               const sf::Color &color)
-    : Object(arena, b2_world, makeB2BodyDef(position, velocity)), color(color),
+Bullet::Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
+               const b2Vec2 &impulse, float radius, const sf::Color &color)
+    : Object(arena, makeB2BodyDef(position, velocity)), color(color),
       destroy_time(arena.getTime() + 3.f / arena.getTimeStep()) {
   b2CircleShape body_shape;
   body_shape.m_radius = radius;
@@ -46,7 +45,10 @@ void Bullet::draw(sf::RenderTarget &target) const {
   drawCircle(target, getPosition(), getRadius(), color);
 }
 
-bool Bullet::shouldDestroy() const {
+bool Bullet::step() {
+  if (Object::step()) {
+    return true;
+  }
   return getArena().getTime() >= destroy_time;
 }
 

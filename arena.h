@@ -43,7 +43,7 @@ public:
   template <std::derived_from<Tank> TankType>
   TankType &spawnTank(const b2Vec2 &position, float radius,
                       const sf::Color &color) {
-    TankType *tank = new TankType(*this, b2_world, position, radius, color);
+    TankType *tank = new TankType(*this, position, radius, color);
     tanks.emplace_back(tank);
     return *tank;
   }
@@ -61,8 +61,8 @@ public:
                       const b2Vec2 &impulse, float radius,
                       const sf::Color &color) {
     Bullet *bullet =
-        new Bullet(*this, b2_world, position, velocity, impulse, radius, color);
-    bullets.emplace_back(bullet);
+        new Bullet(*this, position, velocity, impulse, radius, color);
+    objects.emplace_back(bullet);
     return *bullet;
   }
 
@@ -75,6 +75,8 @@ public:
   Time getTime() const { return time; }
 
 private:
+  friend Object;
+
   /// Alias for the type of the smart pointers used to store the polymorphic
   /// objects.
   /// @tparam ObjectType the type of the object that the pointer points to.
@@ -86,22 +88,26 @@ private:
   template <std::derived_from<Object> ObjectType>
   using ObjectContainer = std::vector<ObjectPtr<ObjectType>>;
 
-  /// Destroy objects whose Object::shouldDestroy() methods return true.
-  /// @tparam ObjectType the type of the objects in the container to be cleaned.
-  /// @param objects the container of objects to be cleaned.
-  template <std::derived_from<Object> ObjectType>
-  void cleanObjects(ObjectContainer<ObjectType> &objects);
+  /// Get the arena's Box2D world.
+  /// @return A reference to the arena's Box2D world.
+  b2World &getB2World() { return b2_world; }
 
-  /// Container of all of the tanks in the arena.
-  ObjectContainer<Tank> tanks;
-
-  /// Container of all of the bullets in the arena. Bullets and tanks are stored
-  /// separately because bullets need to be rendered before tanks.
-  ObjectContainer<Bullet> bullets;
+  /// @copydoc getB2World()
+  const b2World &getB2World() const { return b2_world; }
 
   /// The Box2D world of the arena. The gravity vector is zero since the world
-  /// is horizontal.
+  /// is horizontal. This has to be destructed after all of the objects have
+  /// been destructed since the destructors of the objects will access the world
+  /// to destroy their bodies.
   b2World b2_world{b2Vec2(0.f, 0.f)};
+
+  /// Container of all of the objects in the arena except for tanks.
+  ObjectContainer<Object> objects;
+
+  /// Container of all of the tanks in the arena. Tank barrels can overlap with
+  /// other objects, so they have to be kept separately and drawn in a
+  /// consistent order after other objects.
+  ObjectContainer<Tank> tanks;
 
   /// The number of seconds in each time step.
   const float time_step;
