@@ -60,6 +60,8 @@ void Arena::step() {
     }
   }
   objects.erase(new_end, objects.end());
+  // The tanks have to be rendered in a consistent order because their barrels
+  // may overlap with other tanks.
   std::erase_if(tanks,
                 [](const ObjectPtr<Tank> &tank) { return tank->step(); });
   b2_world.Step(time_step, 8, 3);

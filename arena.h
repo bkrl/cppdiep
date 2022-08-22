@@ -6,6 +6,7 @@
 #include <concepts>
 #include <cstdint>
 #include <memory>
+#include <utility>
 #include <vector>
 
 #include <Box2D/Common/b2Math.h>
@@ -34,36 +35,32 @@ public:
   /// Advance the state of the arena by one time step.
   void step();
 
+  /// Spawn a non-tank object in the arena.
+  /// @tparam ObjectType the type of the object to spawn
+  /// @param args the arguments to be forwarded to the object's constructor
+  /// @return A reference to the new object.
+  // clang-format and doxygen doen't handle the requires expression properly.
+  // clang-format off
+  template <std::derived_from<Object> ObjectType, typename... Args>
+  /// @cond
+    requires(!std::derived_from<ObjectType, Tank>)
+  /// @endcond
+  ObjectType &spawnObject(Args &&...args) {
+    ObjectType *object = new ObjectType(*this, std::forward<Args>(args)...);
+    objects.emplace_back(object);
+    return *object;
+  }
+  // clang-format on
+
   /// Spawn a tank in the arena.
   /// @tparam TankType the type of the tank to spawn
-  /// @param position the position where the tank is spawned.
-  /// @param radius the radius of the new tank.
-  /// @param color the color of the new tank.
+  /// @param args the arguments to be forwarded to the tank's constructor
   /// @return A reference to the new tank.
-  template <std::derived_from<Tank> TankType>
-  TankType &spawnTank(const b2Vec2 &position, float radius,
-                      const sf::Color &color) {
-    TankType *tank = new TankType(*this, position, radius, color);
+  template <std::derived_from<Tank> TankType, typename... Args>
+  TankType &spawnObject(Args &&...args) {
+    TankType *tank = new TankType(*this, std::forward<Args>(args)...);
     tanks.emplace_back(tank);
     return *tank;
-  }
-
-  /// Spawn a bullet in the arena.
-  /// @param position the position where the bullet is spawned.
-  /// @param velocity the initial velocity of the bullet. This should be set to
-  /// the velocity of the tank that fired the bullet.
-  /// @param impulse the impulse applied to the bullet on top of the initial
-  /// velocity.
-  /// @param radius the radius of the new bullet.
-  /// @param color the color of the new bullet.
-  /// @return A reference to the new bullet.
-  Bullet &spawnBullet(const b2Vec2 &position, const b2Vec2 &velocity,
-                      const b2Vec2 &impulse, float radius,
-                      const sf::Color &color) {
-    Bullet *bullet =
-        new Bullet(*this, position, velocity, impulse, radius, color);
-    objects.emplace_back(bullet);
-    return *bullet;
   }
 
   /// Get the time step size.
