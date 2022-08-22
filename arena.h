@@ -68,7 +68,7 @@ public:
   float getTimeStep() const { return time_step; }
 
   /// Get the current time.
-  /// @return the current time in steps.
+  /// @return The current time in steps.
   Time getTime() const { return time; }
 
 private:
