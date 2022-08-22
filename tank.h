@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_TANK_H
 #define CPPDIEP_TANK_H
 
+/// @file
+/// Definition of the Tank class.
+
 #include <cmath>
 
 #include <Box2D/Collision/Shapes/b2Shape.h>

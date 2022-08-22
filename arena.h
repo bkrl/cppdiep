@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_ARENA_H
 #define CPPDIEP_ARENA_H
 
+/// @file
+/// Definition of the Arena class.
+
 #include "arena.fwd.h"
 
 #include <concepts>

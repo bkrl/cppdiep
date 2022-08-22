@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_TIME_H
 #define CPPDIEP_TIME_H
 
+/// @file
+/// Definition of the Time type alias.
+
 #include <cstdint>
 
 namespace cppdiep {

@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_BASIC_TANK_H
 #define CPPDIEP_BASIC_TANK_H
 
+/// @file
+/// Definition of the BasicTank class.
+
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "tank.h"

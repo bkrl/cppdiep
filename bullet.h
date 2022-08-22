@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_BULLET_H
 #define CPPDIEP_BULLET_H
 
+/// @file
+/// Definition of the Bullet class.
+
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>

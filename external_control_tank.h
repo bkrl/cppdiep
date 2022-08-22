@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_EXTERNAL_CONTROL_TANK_H
 #define CPPDIEP_EXTERNAL_CONTROL_TANK_H
 
+/// @file
+/// Definition of the ExternalControlTank class template.
+
 #include <concepts>
 
 #include <Box2D/Common/b2Math.h>

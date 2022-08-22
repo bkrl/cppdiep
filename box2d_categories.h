@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_B2_CATEGORIES_H
 #define CPPDIEP_B2_CATEGORIES_H
 
+/// @file
+/// Box2D collision category constants.
+
 #include <Box2D/Common/b2Settings.h>
 
 namespace cppdiep {

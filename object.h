@@ -1,6 +1,9 @@
 #ifndef CPPDIEP_OBJECT_H
 #define CPPDIEP_OBJECT_H
 
+/// @file
+/// Definition of the Object class.
+
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2World.h>
