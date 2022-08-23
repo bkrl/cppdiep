@@ -33,7 +33,6 @@ Bullet::Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
   b2FixtureDef fixture_def;
   fixture_def.shape = &body_shape;
   fixture_def.density = 1.f;
-  fixture_def.friction = 0.3f;
   fixture_def.restitution = 0.25f;
   fixture_def.filter.categoryBits = box2d_categories::BULLET;
   fixture_def.filter.maskBits =
