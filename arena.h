@@ -40,6 +40,8 @@ public:
 
   /// Spawn a non-tank object in the arena.
   /// @tparam ObjectType the type of the object to spawn
+  /// @tparam Args the type of the arguments forwarded to the object's
+  /// constructor
   /// @param args the arguments to be forwarded to the object's constructor
   /// @return A reference to the new object.
   template <std::derived_from<Object> ObjectType, typename... Args>
