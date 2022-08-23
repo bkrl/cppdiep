@@ -43,7 +43,7 @@ public:
   /// @param args the arguments to be forwarded to the object's constructor
   /// @return A reference to the new object.
   template <std::derived_from<Object> ObjectType, typename... Args>
-  ObjectType &spawnObject(Args &&...args) {
+  ObjectType &spawn(Args &&...args) {
     ObjectType *object = new ObjectType(*this, std::forward<Args>(args)...);
     if constexpr (std::derived_from<ObjectType, Tank>) {
       tanks.emplace_back(object);

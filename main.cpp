@@ -28,10 +28,9 @@ int main() {
 
   // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  auto &tank =
-      arena.spawnObject<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
-          b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
-  arena.spawnObject<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+  auto &tank = arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+      b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
+  arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {

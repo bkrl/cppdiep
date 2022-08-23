@@ -23,7 +23,7 @@ void BasicTank::fire() {
   // some teleportation if the spawned bullet intersects another object. In the
   // future, collisions between a bullet and the tank that fired it will be
   // disabled and the bullet will be spawned inside the tank body.
-  getArena().spawnObject<Bullet>(
+  getArena().spawn<Bullet>(
       getPosition() + (getRadius() + bullet_radius) * target_vec, getVelocity(),
       impulse_magnitude * target_vec, bullet_radius, getColor());
   // Simulate recoil by applying the same impulse in the opposite direction to
