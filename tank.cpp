@@ -52,7 +52,7 @@ void Tank::drawCannon(sf::RenderTarget &target, float length, float width,
                       float angle) const {
   sf::RectangleShape cannon_shape(sf::Vector2f(length, width));
   cannon_shape.setOrigin(0.f, width / 2.f);
-  cannon_shape.setPosition(convertVector(getPosition()));
+  cannon_shape.setPosition(to_sf_Vector2f(getPosition()));
   cannon_shape.setFillColor(colors::CANNON);
   cannon_shape.setOutlineThickness(OUTLINE_THICKNESS);
   cannon_shape.setOutlineColor(darken(colors::CANNON));

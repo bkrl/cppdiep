@@ -35,7 +35,7 @@ int main() {
 
   while (window.isOpen()) {
     // Make the tank cannon point towards the mouse.
-    b2Vec2 mouse_position = cppdiep::convertVector(
+    b2Vec2 mouse_position = cppdiep::to_b2Vec2(
         window.mapPixelToCoords(sf::Mouse::getPosition(window)));
     tank.setTarget(mouse_position - tank.getPosition());
 

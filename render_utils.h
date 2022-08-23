@@ -68,14 +68,14 @@ inline float radiansToDegrees(float radians) {
 /// Convert a Box2D vector to an SFML vector.
 /// @param b2_vec a Box2D vector.
 /// @return The SFML vector.
-inline sf::Vector2f convertVector(const b2Vec2 &b2_vec) {
+inline sf::Vector2f to_sf_Vector2f(const b2Vec2 &b2_vec) {
   return sf::Vector2f(b2_vec.x, b2_vec.y);
 }
 
 /// Convert an SFML vector to a Box2D vector.
 /// @param sf_vec an SFML vector.
 /// @return The Box2D vector.
-inline b2Vec2 convertVector(const sf::Vector2f &sf_vec) {
+inline b2Vec2 to_b2Vec2(const sf::Vector2f &sf_vec) {
   return b2Vec2(sf_vec.x, sf_vec.y);
 }
 
