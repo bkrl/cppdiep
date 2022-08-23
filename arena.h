@@ -42,28 +42,15 @@ public:
   /// @tparam ObjectType the type of the object to spawn
   /// @param args the arguments to be forwarded to the object's constructor
   /// @return A reference to the new object.
-  // clang-format and doxygen doen't handle the requires expression properly.
-  // clang-format off
   template <std::derived_from<Object> ObjectType, typename... Args>
-  /// @cond
-    requires(!std::derived_from<ObjectType, Tank>)
-  /// @endcond
   ObjectType &spawnObject(Args &&...args) {
     ObjectType *object = new ObjectType(*this, std::forward<Args>(args)...);
-    objects.emplace_back(object);
+    if constexpr (std::derived_from<ObjectType, Tank>) {
+      tanks.emplace_back(object);
+    } else {
+      objects.emplace_back(object);
+    }
     return *object;
-  }
-  // clang-format on
-
-  /// Spawn a tank in the arena.
-  /// @tparam TankType the type of the tank to spawn
-  /// @param args the arguments to be forwarded to the tank's constructor
-  /// @return A reference to the new tank.
-  template <std::derived_from<Tank> TankType, typename... Args>
-  TankType &spawnObject(Args &&...args) {
-    TankType *tank = new TankType(*this, std::forward<Args>(args)...);
-    tanks.emplace_back(tank);
-    return *tank;
   }
 
   /// Get the time step size.
