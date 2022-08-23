@@ -1,5 +1,6 @@
 #include "arena.h"
 
+#include <algorithm>
 #include <array>
 #include <concepts>
 #include <memory>
@@ -50,16 +51,12 @@ void Arena::draw(sf::RenderTarget &target) const {
 }
 
 void Arena::step() {
-  // Replace objects that need to be destroyed with objects moved from the end
-  // of the vector. Iterating in reverse simplifies things since we don't have
-  // to worry about skipping over objects when removing an object.
-  auto new_end = objects.end();
-  for (auto it = objects.rbegin(); it != objects.rend(); ++it) {
-    if ((*it)->step()) {
-      *it = std::move(*--new_end);
-    }
-  }
-  objects.erase(new_end, objects.end());
+  // Remove objects that need to be destroyed without preserving order.
+  objects.erase(std::partition(objects.begin(), objects.end(),
+                               [](const ObjectPtr<Object> &object) {
+                                 return !object->step();
+                               }),
+                objects.end());
   // The tanks have to be rendered in a consistent order because their barrels
   // may overlap with other tanks.
   std::erase_if(tanks,
