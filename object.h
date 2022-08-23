@@ -33,7 +33,7 @@ public:
 protected:
   /// Construct an object.
   /// @param arena the arena that contains the object. The object will keep a
-  /// reference to the arena so the
+  /// reference to the arena.
   /// @param b2_body_def the Box2D body definition that will be used to create
   /// the object's body.
   Object(Arena &arena, const b2BodyDef &b2_body_def);
