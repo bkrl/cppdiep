@@ -12,7 +12,8 @@
 
 namespace cppdiep {
 
-/// A tank controlled externally using the move() and fire() methods.
+/// A tank controlled externally using the move(), setTarget(), and fire()
+/// methods.
 /// @tparam BaseTank the type of the tank to be controlled externally.
 template <std::derived_from<Tank> BaseTank>
 class ExternalControlTank final : public BaseTank {
