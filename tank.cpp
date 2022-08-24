@@ -16,16 +16,15 @@
 
 namespace cppdiep {
 
-namespace {
-b2BodyDef makeB2BodyDef(const b2Vec2 &position) {
+b2BodyDef Tank::makeB2BodyDef(const b2Vec2 &position) {
   b2BodyDef body_def;
   body_def.type = b2_dynamicBody;
   body_def.position = position;
   body_def.fixedRotation = true;
   body_def.linearDamping = 1.f;
+  body_def.userData = this;
   return body_def;
 }
-} // namespace
 
 Tank::Tank(Arena &arena, const b2Vec2 &position, float radius,
            const sf::Color &color)

@@ -45,6 +45,12 @@ protected:
 private:
   friend Arena;
 
+  /// Make the Box2D body definition for the bullet.
+  /// @param position the initial position of the bullet.
+  /// @param velocity the initial velocity of the bullet.
+  /// @return The Box2D body definition for the bullet.
+  b2BodyDef makeB2BodyDef(const b2Vec2 &position, const b2Vec2 &velocity);
+
   /// The color of the bullet.
   sf::Color color;
 

@@ -85,6 +85,11 @@ private:
   /// @param the magnitude of the force used to move the tank.
   virtual float getMoveForce() const = 0;
 
+  /// Make the Box2D body definition for the tank.
+  /// @param position the initial position of the tank.
+  /// @return the Box2D body definition for the tank.
+  b2BodyDef makeB2BodyDef(const b2Vec2 &position);
+
   /// The color of the tank.
   sf::Color color;
 };

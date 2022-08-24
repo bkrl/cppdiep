@@ -11,8 +11,8 @@
 
 namespace cppdiep {
 
-namespace {
-b2BodyDef makeB2BodyDef(const b2Vec2 &position, const b2Vec2 &velocity) {
+b2BodyDef Bullet::makeB2BodyDef(const b2Vec2 &position,
+                                const b2Vec2 &velocity) {
   b2BodyDef body_def;
   body_def.type = b2_dynamicBody;
   body_def.position = position;
@@ -20,9 +20,9 @@ b2BodyDef makeB2BodyDef(const b2Vec2 &position, const b2Vec2 &velocity) {
   body_def.linearDamping = 0.5f;
   body_def.angularDamping = 0.5f;
   body_def.bullet = true;
+  body_def.userData = this;
   return body_def;
 }
-} // namespace
 
 Bullet::Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
                const b2Vec2 &impulse, float radius, const sf::Color &color)
