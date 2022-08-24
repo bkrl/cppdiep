@@ -39,7 +39,7 @@ public:
   /// Advance the state of the arena by one time step.
   void step();
 
-  /// Spawn a non-tank object in the arena.
+  /// Spawn an object in the arena.
   /// @tparam ObjectType the type of the object to spawn.
   /// @tparam Args the type of the arguments forwarded to the object's
   /// constructor.
