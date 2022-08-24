@@ -4,6 +4,7 @@
 #include <array>
 #include <concepts>
 #include <memory>
+#include <set>
 #include <utility>
 #include <vector>
 

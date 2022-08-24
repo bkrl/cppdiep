@@ -9,6 +9,7 @@
 #include <concepts>
 #include <cstdint>
 #include <memory>
+#include <set>
 #include <utility>
 #include <vector>
 
@@ -48,7 +49,7 @@ public:
   ObjectType &spawn(Args &&...args) {
     ObjectType *object = new ObjectType(*this, std::forward<Args>(args)...);
     if constexpr (std::derived_from<ObjectType, Tank>) {
-      tanks.emplace_back(object);
+      tanks.emplace(object);
     } else {
       objects.emplace_back(object);
     }
@@ -72,11 +73,6 @@ private:
   template <std::derived_from<Object> ObjectType>
   using ObjectPtr = std::unique_ptr<ObjectType, typename ObjectType::Deleter>;
 
-  /// Alias for the type of the container used to store objects.
-  /// @tparam ObjectType the type of the objects stored in the container.
-  template <std::derived_from<Object> ObjectType>
-  using ObjectContainer = std::vector<ObjectPtr<ObjectType>>;
-
   /// Get the arena's Box2D world.
   /// @return A reference to the arena's Box2D world.
   b2World &getB2World() { return b2_world; }
@@ -91,12 +87,19 @@ private:
   b2World b2_world{b2Vec2(0.f, 0.f)};
 
   /// Container of all of the objects in the arena except for tanks.
-  ObjectContainer<Object> objects;
+  std::vector<ObjectPtr<Object>> objects;
+
+  /// Tank radius comparison functor passed to the multiset that stores tanks.
+  struct TankRadiusCompare {
+    bool operator()(const ObjectPtr<Tank> &a, const ObjectPtr<Tank> &b) const {
+      return a->getRadius() < b->getRadius();
+    }
+  };
 
   /// Container of all of the tanks in the arena. Tank barrels can overlap with
-  /// other objects, so they have to be kept separately and drawn in a
-  /// consistent order after other objects.
-  ObjectContainer<Tank> tanks;
+  /// other objects, so they have to be drawn after other objects from smallest
+  /// to biggest.
+  std::multiset<ObjectPtr<Tank>, TankRadiusCompare> tanks;
 
   /// The number of seconds in each time step.
   const float time_step;
