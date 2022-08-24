@@ -15,6 +15,13 @@ else()
   add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
+include(CheckIPOSupported)
+check_ipo_supported(RESULT HAVE_IPO)
+if(HAVE_IPO)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_MINSIZEREL ON)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
+endif()
+
 find_package(
   SFML 2.5
   COMPONENTS graphics
