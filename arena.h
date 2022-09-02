@@ -14,7 +14,10 @@
 #include <vector>
 
 #include <Box2D/Common/b2Math.h>
+#include <Box2D/Dynamics/Contacts/b2Contact.h>
+#include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2World.h>
+#include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -68,12 +71,21 @@ public:
 private:
   friend Object;
 
+  /// The arena's Box2D contact listener type.
+  struct ContactListener : public b2ContactListener {
+    void PostSolve(b2Contact *contact,
+                   const b2ContactImpulse *impulse) override;
+  };
+
   /// Get the arena's Box2D world.
   /// @return A reference to the arena's Box2D world.
   b2World &getB2World() { return b2_world; }
 
   /// @copydoc getB2World()
   const b2World &getB2World() const { return b2_world; }
+
+  /// The arena's Box2D contact listener.
+  ContactListener contact_listener;
 
   /// The Box2D world of the arena. The gravity vector is zero since the world
   /// is horizontal. This has to be destructed after all of the objects have

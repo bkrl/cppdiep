@@ -29,9 +29,17 @@ public:
   /// @return The current velocity of the object.
   b2Vec2 getVelocity() const { return getB2Body().GetLinearVelocity(); }
 
+  /// Get the current health of the object.
+  /// @return The current health of the object.
+  float getHealth() const { return health; }
+
   /// Draw the object to an SFML render target.
   /// @param target the SFML render target to draw to.
   virtual void draw(sf::RenderTarget &target) const = 0;
+
+  /// Decrease the object's health.
+  /// @param damage_amount the amount of damage inflicted.
+  void damage(float damage_amount) { health -= damage_amount; }
 
 protected:
   /// Construct an object. Objects should only be created by calling
@@ -40,16 +48,13 @@ protected:
   /// reference to the arena.
   /// @param b2_body_def the Box2D body definition that will be used to create
   /// the object's body.
-  Object(Arena &arena, const b2BodyDef &b2_body_def);
+  /// @param max_health the maximum amount of health that the object can have.
+  Object(Arena &arena, const b2BodyDef &b2_body_def, float max_health);
 
   /// Advance the state of the object by one time step and return whether the
   /// object should be destroyed now.
   /// @return Whether the object should be destroyed now.
-  virtual bool step() {
-    // Health and damage haven't been implemented yet so this just returns
-    // false.
-    return false;
-  }
+  virtual bool step() { return getHealth() <= 0.f; }
 
   /// Get a reference to the arena that contains the object.
   /// @return A reference to the arena that contains the object.
@@ -70,6 +75,9 @@ private:
 
   /// The Box2D body of the object.
   b2Body &b2_body;
+
+  /// The amount of health that the object has.
+  float health;
 };
 
 } // namespace cppdiep

@@ -26,8 +26,8 @@ b2BodyDef Bullet::makeB2BodyDef(const b2Vec2 &position,
 
 Bullet::Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
                const b2Vec2 &impulse, float radius, const sf::Color &color)
-    : Object(arena, makeB2BodyDef(position, velocity)), color(color),
-      destroy_time(arena.getTime() + 3.f / arena.getTimeStep()) {
+    : Object(arena, makeB2BodyDef(position, velocity), 10.f * radius * radius),
+      color(color), destroy_time(arena.getTime() + 3.f / arena.getTimeStep()) {
   b2CircleShape body_shape;
   body_shape.m_radius = radius;
   b2FixtureDef fixture_def;

@@ -26,9 +26,9 @@ b2BodyDef Tank::makeB2BodyDef(const b2Vec2 &position) {
   return body_def;
 }
 
-Tank::Tank(Arena &arena, const b2Vec2 &position, float radius,
+Tank::Tank(Arena &arena, const b2Vec2 &position, float radius, float max_health,
            const sf::Color &color)
-    : Object(arena, makeB2BodyDef(position)), color(color) {
+    : Object(arena, makeB2BodyDef(position), max_health), color(color) {
   b2CircleShape body_shape;
   body_shape.m_radius = radius;
   b2FixtureDef fixture_def;

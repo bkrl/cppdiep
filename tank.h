@@ -23,14 +23,6 @@ namespace cppdiep {
 /// A generic tank.
 class Tank : public Object {
 public:
-  /// Construct a Tank.
-  /// @param arena the arena that contains the tank.
-  /// @param position the initial position of the tank.
-  /// @param radius the radius of the tank's body.
-  /// @param color the color of the tank.
-  Tank(Arena &arena, const b2Vec2 &position, float radius,
-       const sf::Color &color);
-
   /// Get the radius of the tank body.
   /// @return the radius of the tank body.
   float getRadius() const {
@@ -55,6 +47,15 @@ public:
   void draw(sf::RenderTarget &target) const override;
 
 protected:
+  /// Construct a Tank.
+  /// @param arena the arena that contains the tank.
+  /// @param position the initial position of the tank.
+  /// @param radius the radius of the tank's body.
+  /// @param max_health the maximum amount of health that the tank can have.
+  /// @param color the color of the tank.
+  Tank(Arena &arena, const b2Vec2 &position, float radius, float max_health,
+       const sf::Color &color);
+
   /// Helper function for drawing cannons.
   /// @param target the SFML render target to draw to.
   /// @param length the length of the barrel. The barrel starts from the center

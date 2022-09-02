@@ -13,7 +13,9 @@ namespace cppdiep {
 /// A tank with a single cannon.
 class BasicTank : public Tank {
 public:
-  using Tank::Tank;
+  BasicTank(Arena &arena, const b2Vec2 &position, float radius,
+            const sf::Color &color)
+      : Tank(arena, position, radius, 100.f * radius * radius, color) {}
 
 protected:
   void fire() override;
