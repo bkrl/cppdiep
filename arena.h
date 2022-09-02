@@ -46,14 +46,15 @@ public:
   /// @param args the arguments to be forwarded to the object's constructor.
   /// @return A reference to the new object.
   template <std::derived_from<Object> ObjectType, typename... Args>
-  ObjectType &spawn(Args &&...args) {
-    ObjectType *object = new ObjectType(*this, std::forward<Args>(args)...);
+  std::weak_ptr<ObjectType> spawn(Args &&...args) {
+    auto object =
+        std::make_shared<ObjectType>(*this, std::forward<Args>(args)...);
     if constexpr (std::derived_from<ObjectType, Tank>) {
-      tanks.emplace(object);
+      tanks.insert(object);
     } else {
-      objects.emplace_back(object);
+      objects.push_back(object);
     }
-    return *object;
+    return object;
   }
 
   /// Get the time step size.
@@ -66,12 +67,6 @@ public:
 
 private:
   friend Object;
-
-  /// Alias for the type of the smart pointers used to store the polymorphic
-  /// objects.
-  /// @tparam ObjectType the type of the object that the pointer points to.
-  template <std::derived_from<Object> ObjectType>
-  using ObjectPtr = std::unique_ptr<ObjectType>;
 
   /// Get the arena's Box2D world.
   /// @return A reference to the arena's Box2D world.
@@ -87,11 +82,12 @@ private:
   b2World b2_world{b2Vec2(0.f, 0.f)};
 
   /// Container of all of the objects in the arena except for tanks.
-  std::vector<ObjectPtr<Object>> objects;
+  std::vector<std::shared_ptr<Object>> objects;
 
   /// Tank radius comparison functor passed to the multiset that stores tanks.
   struct TankRadiusCompare {
-    bool operator()(const ObjectPtr<Tank> &a, const ObjectPtr<Tank> &b) const {
+    bool operator()(const std::shared_ptr<Tank> &a,
+                    const std::shared_ptr<Tank> &b) const {
       return a->getRadius() < b->getRadius();
     }
   };
@@ -99,7 +95,7 @@ private:
   /// Container of all of the tanks in the arena. Tank barrels can overlap with
   /// other objects, so they have to be drawn after other objects from smallest
   /// to biggest.
-  std::multiset<ObjectPtr<Tank>, TankRadiusCompare> tanks;
+  std::multiset<std::shared_ptr<Tank>, TankRadiusCompare> tanks;
 
   /// The number of seconds in each time step.
   const float time_step;

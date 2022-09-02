@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -28,16 +30,24 @@ int main() {
 
   // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  auto &tank = arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
-      b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
+  std::weak_ptr tank =
+      arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
+          b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
   arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {
+    std::shared_ptr locked_tank = tank.lock();
+    if (!locked_tank) {
+      // Tank has been destroyed.
+      window.close();
+      break;
+    }
+
     // Make the tank cannon point towards the mouse.
     b2Vec2 mouse_position = cppdiep::toB2Vec2(
         window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-    tank.setTarget(mouse_position - tank.getPosition());
+    locked_tank->setTarget(mouse_position - locked_tank->getPosition());
 
     // Process events.
     sf::Event event;
@@ -46,20 +56,20 @@ int main() {
         window.close();
       } else if (event.type == sf::Event::MouseButtonPressed &&
                  event.mouseButton.button == sf::Mouse::Left) {
-        tank.fire();
+        locked_tank->fire();
       }
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-      tank.move(b2Vec2(0.f, 1.f));
+      locked_tank->move(b2Vec2(0.f, 1.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-      tank.move(b2Vec2(-1.f, 0.f));
+      locked_tank->move(b2Vec2(-1.f, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-      tank.move(b2Vec2(0.f, -1.f));
+      locked_tank->move(b2Vec2(0.f, -1.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-      tank.move(b2Vec2(1.f, 0.f));
+      locked_tank->move(b2Vec2(1.f, 0.f));
     }
 
     arena.step();

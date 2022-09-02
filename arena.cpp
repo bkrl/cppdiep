@@ -42,11 +42,11 @@ Arena::Arena(float size, float time_step) : time_step(time_step) {
 
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
-  for (const ObjectPtr<Object> &object : objects) {
+  for (const std::shared_ptr<Object> &object : objects) {
     object->draw(target);
   }
   // Tanks are drawn last so that their barrels are on top of other objects.
-  for (const ObjectPtr<Tank> &tank : tanks) {
+  for (const std::shared_ptr<Tank> &tank : tanks) {
     tank->draw(target);
   }
 }
@@ -54,14 +54,14 @@ void Arena::draw(sf::RenderTarget &target) const {
 void Arena::step() {
   // Remove objects that need to be destroyed without preserving order.
   objects.erase(std::partition(objects.begin(), objects.end(),
-                               [](const ObjectPtr<Object> &object) {
+                               [](const std::shared_ptr<Object> &object) {
                                  return !object->step();
                                }),
                 objects.end());
   // The tanks have to be rendered in a consistent order because their barrels
   // may overlap with other tanks.
   std::erase_if(tanks,
-                [](const ObjectPtr<Tank> &tank) { return tank->step(); });
+                [](const std::shared_ptr<Tank> &tank) { return tank->step(); });
   b2_world.Step(time_step, 8, 3);
   ++time;
 }
