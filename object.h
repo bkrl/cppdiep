@@ -29,6 +29,10 @@ public:
   /// @return The current velocity of the object.
   b2Vec2 getVelocity() const { return getB2Body().GetLinearVelocity(); }
 
+  /// Get the maximum possible health of the object.
+  /// @return The maximum possible health of the object.
+  float getMaxHealth() const { return max_health; }
+
   /// Get the current health of the object.
   /// @return The current health of the object.
   float getHealth() const { return health; }
@@ -75,6 +79,9 @@ private:
 
   /// The Box2D body of the object.
   b2Body &b2_body;
+
+  /// The maximum amount of health that the object can have.
+  float max_health;
 
   /// The amount of health that the object has.
   float health;
