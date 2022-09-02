@@ -29,11 +29,11 @@ namespace cppdiep {
 
 void Arena::ContactListener::PostSolve(b2Contact *const contact,
                                        const b2ContactImpulse *const impulse) {
-  const auto user_data_a =
+  const auto object_a =
       static_cast<Object *>(contact->GetFixtureA()->GetBody()->GetUserData());
-  const auto user_data_b =
+  const auto object_b =
       static_cast<Object *>(contact->GetFixtureB()->GetBody()->GetUserData());
-  if (!user_data_a || !user_data_b) {
+  if (!object_a || !object_b) {
     return;
   }
   const float impulse_magnitude = std::hypot(
@@ -42,8 +42,8 @@ void Arena::ContactListener::PostSolve(b2Contact *const contact,
       std::accumulate(impulse->tangentImpulses,
                       impulse->tangentImpulses + impulse->count, 0.f));
   if (impulse_magnitude > 0.f) {
-    user_data_a->damage(impulse_magnitude);
-    user_data_b->damage(impulse_magnitude);
+    object_a->damage(impulse_magnitude);
+    object_b->damage(impulse_magnitude);
   }
 }
 
