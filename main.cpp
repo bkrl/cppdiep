@@ -25,19 +25,20 @@ int main() {
   // The Y size of the view is negative to flip things vertically since SFML
   // uses a downwards vertical axis while the arena uses an upwards vertical
   // axis.
-  sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(arena_size, -arena_size));
+  const sf::View view(sf::Vector2f(0.f, 0.f),
+                      sf::Vector2f(arena_size, -arena_size));
   window.setView(view);
 
   // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  std::weak_ptr tank =
+  const std::weak_ptr tank =
       arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
           b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
   arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {
-    std::shared_ptr locked_tank = tank.lock();
+    const std::shared_ptr locked_tank = tank.lock();
     if (!locked_tank) {
       // Tank has been destroyed.
       window.close();
@@ -45,7 +46,7 @@ int main() {
     }
 
     // Make the tank cannon point towards the mouse.
-    b2Vec2 mouse_position = cppdiep::toB2Vec2(
+    const b2Vec2 mouse_position = cppdiep::toB2Vec2(
         window.mapPixelToCoords(sf::Mouse::getPosition(window)));
     locked_tank->setTarget(mouse_position - locked_tank->getPosition());
 

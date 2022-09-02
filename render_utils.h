@@ -48,7 +48,7 @@ inline sf::Color darken(const sf::Color &color) {
 /// @param radius the radius of the circle.
 /// @param color the color of the circle.
 inline void drawCircle(sf::RenderTarget &target, const b2Vec2 &position,
-                       float radius, const sf::Color &color) {
+                       const float radius, const sf::Color &color) {
   sf::CircleShape shape(radius);
   shape.setOrigin(radius, radius);
   shape.setPosition(position.x, position.y);
@@ -61,7 +61,7 @@ inline void drawCircle(sf::RenderTarget &target, const b2Vec2 &position,
 /// Convert radians to degrees.
 /// @param radians an angle in radians.
 /// @return The angle in degrees.
-inline float radiansToDegrees(float radians) {
+inline float radiansToDegrees(const float radians) {
   return radians * 180.f / std::numbers::pi_v<float>;
 }
 

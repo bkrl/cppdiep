@@ -26,8 +26,8 @@ b2BodyDef Tank::makeB2BodyDef(const b2Vec2 &position) {
   return body_def;
 }
 
-Tank::Tank(Arena &arena, const b2Vec2 &position, float radius, float max_health,
-           const sf::Color &color)
+Tank::Tank(Arena &arena, const b2Vec2 &position, const float radius,
+           const float max_health, const sf::Color &color)
     : Object(arena, makeB2BodyDef(position), max_health), color(color) {
   b2CircleShape body_shape;
   body_shape.m_radius = radius;
@@ -47,8 +47,8 @@ void Tank::draw(sf::RenderTarget &target) const {
   drawCircle(target, getPosition(), getRadius(), getColor());
 }
 
-void Tank::drawCannon(sf::RenderTarget &target, float length, float width,
-                      float angle) const {
+void Tank::drawCannon(sf::RenderTarget &target, const float length,
+                      const float width, const float angle) const {
   sf::RectangleShape cannon_shape(sf::Vector2f(length, width));
   cannon_shape.setOrigin(0.f, width / 2.f);
   cannon_shape.setPosition(toSfVector2f(getPosition()));

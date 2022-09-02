@@ -43,7 +43,7 @@ public:
 
   /// Decrease the object's health.
   /// @param damage_amount the amount of damage inflicted.
-  void damage(float damage_amount) { health -= damage_amount; }
+  void damage(const float damage_amount) { health -= damage_amount; }
 
 protected:
   /// Construct an object. Objects should only be created by calling

@@ -15,8 +15,8 @@ void BasicTank::drawCannons(sf::RenderTarget &target) const {
 void BasicTank::fire() {
   b2Vec2 target_vec = getTarget();
   target_vec.Normalize();
-  float bullet_radius = getRadius() / 2.f;
-  float impulse_magnitude = 10.f * getRadius();
+  const float bullet_radius = getRadius() / 2.f;
+  const float impulse_magnitude = 10.f * getRadius();
   // The bullet is spawned in the barrel just outside of the tank body to avoid
   // teleportation due to the bullet intersecting the tank body. This causes
   // some teleportation if the spawned bullet intersects another object. In the

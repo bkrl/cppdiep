@@ -13,7 +13,7 @@ namespace cppdiep {
 /// A tank with a single cannon.
 class BasicTank : public Tank {
 public:
-  BasicTank(Arena &arena, const b2Vec2 &position, float radius,
+  BasicTank(Arena &arena, const b2Vec2 &position, const float radius,
             const sf::Color &color)
       : Tank(arena, position, radius, 100.f * radius * radius, color) {}
 
