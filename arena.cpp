@@ -27,16 +27,16 @@
 
 namespace cppdiep {
 
-void Arena::ContactListener::PostSolve(b2Contact *contact,
-                                       const b2ContactImpulse *impulse) {
-  auto user_data_a =
+void Arena::ContactListener::PostSolve(b2Contact *const contact,
+                                       const b2ContactImpulse *const impulse) {
+  const auto user_data_a =
       static_cast<Object *>(contact->GetFixtureA()->GetBody()->GetUserData());
-  auto user_data_b =
+  const auto user_data_b =
       static_cast<Object *>(contact->GetFixtureB()->GetBody()->GetUserData());
   if (!user_data_a || !user_data_b) {
     return;
   }
-  float impulse_magnitude = std::hypot(
+  const float impulse_magnitude = std::hypot(
       std::accumulate(impulse->normalImpulses,
                       impulse->normalImpulses + impulse->count, 0.f),
       std::accumulate(impulse->tangentImpulses,
@@ -47,7 +47,7 @@ void Arena::ContactListener::PostSolve(b2Contact *contact,
   }
 }
 
-Arena::Arena(float size, float time_step) : time_step(time_step) {
+Arena::Arena(const float size, const float time_step) : time_step(time_step) {
   b2_world.SetContactListener(&contact_listener);
   b2BodyDef border_body_def;
   b2Body &border_body = *b2_world.CreateBody(&border_body_def);

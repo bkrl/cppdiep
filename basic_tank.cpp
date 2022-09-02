@@ -9,8 +9,7 @@
 namespace cppdiep {
 
 void BasicTank::drawCannons(sf::RenderTarget &target) const {
-  float radius = getRadius();
-  drawCannon(target, 2 * radius, radius, getTargetAngle());
+  drawCannon(target, 2 * getRadius(), getRadius(), getTargetAngle());
 }
 
 void BasicTank::fire() {

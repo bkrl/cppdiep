@@ -50,7 +50,7 @@ public:
   /// @return A reference to the new object.
   template <std::derived_from<Object> ObjectType, typename... Args>
   std::weak_ptr<ObjectType> spawn(Args &&...args) {
-    auto object =
+    const auto object =
         std::make_shared<ObjectType>(*this, std::forward<Args>(args)...);
     if constexpr (std::derived_from<ObjectType, Tank>) {
       tanks.insert(object);
