@@ -18,6 +18,9 @@ class Object {
 public:
   Object(const Object &) = delete;
 
+  /// Destruct an object and destroy the object's Box2D body.
+  virtual ~Object();
+
   /// Get the current position of the object.
   /// @return The current position of the object.
   b2Vec2 getPosition() const { return getB2Body().GetPosition(); }
@@ -31,15 +34,13 @@ public:
   virtual void draw(sf::RenderTarget &target) const = 0;
 
 protected:
-  /// Construct an object.
+  /// Construct an object. Objects should only be created by calling
+  /// Arena::spawn().
   /// @param arena the arena that contains the object. The object will keep a
   /// reference to the arena.
   /// @param b2_body_def the Box2D body definition that will be used to create
   /// the object's body.
   Object(Arena &arena, const b2BodyDef &b2_body_def);
-
-  /// Destruct an object and destroy the object's Box2D body.
-  virtual ~Object();
 
   /// Advance the state of the object by one time step and return whether the
   /// object should be destroyed now.
@@ -63,12 +64,6 @@ protected:
 
 private:
   friend Arena;
-
-  /// A deleter that the arena passes to the smart pointer. This is necessary
-  /// since the destructor is not public.
-  struct Deleter {
-    void operator()(Object *object) const { delete object; }
-  };
 
   /// The arena that contains the object.
   Arena &arena;

@@ -20,15 +20,6 @@ namespace cppdiep {
 /// A bullet fired from a cannon. Bullets disappear after three seconds.
 class Bullet : public Object {
 public:
-  /// Get the radius of the bullet.
-  /// @return The radius of the bullet.
-  float getRadius() const {
-    return getB2Body().GetFixtureList()->GetShape()->m_radius;
-  }
-
-  void draw(sf::RenderTarget &target) const override;
-
-protected:
   /// Construct a bullet.
   /// @param arena the arena that contains the bullet.
   /// @param position the initial position of the bullet.
@@ -40,6 +31,15 @@ protected:
   Bullet(Arena &arena, const b2Vec2 &position, const b2Vec2 &velocity,
          const b2Vec2 &impulse, float radius, const sf::Color &color);
 
+  /// Get the radius of the bullet.
+  /// @return The radius of the bullet.
+  float getRadius() const {
+    return getB2Body().GetFixtureList()->GetShape()->m_radius;
+  }
+
+  void draw(sf::RenderTarget &target) const override;
+
+protected:
   bool step() override;
 
 private:

@@ -71,7 +71,7 @@ private:
   /// objects.
   /// @tparam ObjectType the type of the object that the pointer points to.
   template <std::derived_from<Object> ObjectType>
-  using ObjectPtr = std::unique_ptr<ObjectType, typename ObjectType::Deleter>;
+  using ObjectPtr = std::unique_ptr<ObjectType>;
 
   /// Get the arena's Box2D world.
   /// @return A reference to the arena's Box2D world.

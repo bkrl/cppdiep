@@ -12,8 +12,10 @@ namespace cppdiep {
 
 /// A tank with a single cannon.
 class BasicTank : public Tank {
-protected:
+public:
   using Tank::Tank;
+
+protected:
   void fire() override;
 
 private:
