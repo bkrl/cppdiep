@@ -4,6 +4,8 @@
 /// @file
 /// Definition of the Tank class.
 
+#include "tank.fwd.h"
+
 #include <cmath>
 
 #include <Box2D/Collision/Shapes/b2Shape.h>

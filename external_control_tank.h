@@ -8,7 +8,7 @@
 
 #include <Box2D/Common/b2Math.h>
 
-#include "tank.h"
+#include "tank.fwd.h"
 
 namespace cppdiep {
 
