@@ -23,19 +23,21 @@ public:
 
   /// Get the current position of the object.
   /// @return The current position of the object.
-  b2Vec2 getPosition() const { return getB2Body().GetPosition(); }
+  b2Vec2 getPosition() const noexcept { return getB2Body().GetPosition(); }
 
   /// Get the current velocity of the object.
   /// @return The current velocity of the object.
-  b2Vec2 getVelocity() const { return getB2Body().GetLinearVelocity(); }
+  b2Vec2 getVelocity() const noexcept {
+    return getB2Body().GetLinearVelocity();
+  }
 
   /// Get the maximum possible health of the object.
   /// @return The maximum possible health of the object.
-  float getMaxHealth() const { return max_health; }
+  float getMaxHealth() const noexcept { return max_health; }
 
   /// Get the current health of the object.
   /// @return The current health of the object.
-  float getHealth() const { return health; }
+  float getHealth() const noexcept { return health; }
 
   /// Draw the object to an SFML render target.
   /// @param target the SFML render target to draw to.
@@ -62,14 +64,14 @@ protected:
 
   /// Get a reference to the arena that contains the object.
   /// @return A reference to the arena that contains the object.
-  Arena &getArena() const { return arena; }
+  Arena &getArena() const noexcept { return arena; }
 
   /// Get a reference to the Box2D body of the object.
   /// @return A reference to the Box2D body of the object.
-  b2Body &getB2Body() { return b2_body; }
+  b2Body &getB2Body() noexcept { return b2_body; }
 
   /// @copydoc getB2Body()
-  const b2Body &getB2Body() const { return b2_body; }
+  const b2Body &getB2Body() const noexcept { return b2_body; }
 
 private:
   friend Arena;

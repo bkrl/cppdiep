@@ -27,7 +27,7 @@ class Tank : public Object {
 public:
   /// Get the radius of the tank body.
   /// @return the radius of the tank body.
-  float getRadius() const {
+  float getRadius() const noexcept {
     return getB2Body().GetFixtureList()->GetShape()->m_radius;
   }
 
@@ -44,7 +44,7 @@ public:
 
   /// Get the color of the tank.
   /// @return The color of the tank.
-  sf::Color getColor() const { return color; }
+  sf::Color getColor() const noexcept { return color; }
 
   void draw(sf::RenderTarget &target) const override;
 
@@ -86,7 +86,7 @@ private:
 
   /// Get the magnitude of the force used to move the tank.
   /// @param the magnitude of the force used to move the tank.
-  virtual float getMoveForce() const = 0;
+  virtual float getMoveForce() const noexcept = 0;
 
   /// Make the Box2D body definition for the tank.
   /// @param position the initial position of the tank.

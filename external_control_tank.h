@@ -26,12 +26,12 @@ public:
   void move(const b2Vec2 &vec) { BaseTank::move(vec); }
 
   /// @copydoc Tank::getTarget()
-  b2Vec2 getTarget() const override { return target; }
+  b2Vec2 getTarget() const noexcept override { return target; }
 
   /// Set the target point of the tank. This is the point that the tank will aim
   /// towards.
   /// @param target the target point relative to the position of the tank.
-  void setTarget(const b2Vec2 &target) { this->target = target; }
+  void setTarget(const b2Vec2 &target) noexcept { this->target = target; }
 
   /// Fire the tank's cannon(s).
   void fire() { BaseTank::fire(); }

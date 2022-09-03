@@ -62,11 +62,11 @@ public:
 
   /// Get the time step size.
   /// @return The time step size.
-  float getTimeStep() const { return time_step; }
+  float getTimeStep() const noexcept { return time_step; }
 
   /// Get the current time.
   /// @return The current time in steps.
-  Time getTime() const { return time; }
+  Time getTime() const noexcept { return time; }
 
 private:
   friend Object;
@@ -79,10 +79,10 @@ private:
 
   /// Get the arena's Box2D world.
   /// @return A reference to the arena's Box2D world.
-  b2World &getB2World() { return b2_world; }
+  b2World &getB2World() noexcept { return b2_world; }
 
   /// @copydoc getB2World()
-  const b2World &getB2World() const { return b2_world; }
+  const b2World &getB2World() const noexcept { return b2_world; }
 
   /// The arena's Box2D contact listener.
   ContactListener contact_listener;
@@ -99,7 +99,7 @@ private:
   /// Tank radius comparison functor passed to the multiset that stores tanks.
   struct TankRadiusCompare {
     bool operator()(const std::shared_ptr<Tank> &a,
-                    const std::shared_ptr<Tank> &b) const {
+                    const std::shared_ptr<Tank> &b) const noexcept {
       return a->getRadius() < b->getRadius();
     }
   };

@@ -33,7 +33,7 @@ public:
 
   /// Get the radius of the bullet.
   /// @return The radius of the bullet.
-  float getRadius() const {
+  float getRadius() const noexcept {
     return getB2Body().GetFixtureList()->GetShape()->m_radius;
   }
 
