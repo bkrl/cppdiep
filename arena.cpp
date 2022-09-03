@@ -36,7 +36,7 @@ void Arena::ContactListener::PostSolve(b2Contact *const contact,
   if (!object_a || !object_b) {
     return;
   }
-  const float impulse_magnitude = std::hypot(
+  const auto impulse_magnitude = std::hypot(
       std::accumulate(impulse->normalImpulses,
                       impulse->normalImpulses + impulse->count, 0.f),
       std::accumulate(impulse->tangentImpulses,
@@ -67,11 +67,11 @@ Arena::Arena(const float size, const float time_step) : time_step(time_step) {
 
 void Arena::draw(sf::RenderTarget &target) const {
   target.clear(colors::BACKGROUND);
-  for (const std::shared_ptr<Object> &object : objects) {
+  for (const auto &object : objects) {
     object->draw(target);
   }
   // Tanks are drawn last so that their barrels are on top of other objects.
-  for (const std::shared_ptr<Tank> &tank : tanks) {
+  for (const auto &tank : tanks) {
     tank->draw(target);
   }
 }
@@ -79,13 +79,11 @@ void Arena::draw(sf::RenderTarget &target) const {
 void Arena::step() {
   b2_world.Step(time_step, 8, 3);
   // Remove objects that need to be destroyed without preserving order.
-  objects.erase(std::partition(objects.begin(), objects.end(),
-                               [](const std::shared_ptr<Object> &object) {
-                                 return !object->step();
-                               }),
-                objects.end());
-  std::erase_if(tanks,
-                [](const std::shared_ptr<Tank> &tank) { return tank->step(); });
+  objects.erase(
+      std::partition(objects.begin(), objects.end(),
+                     [](const auto &object) { return !object->step(); }),
+      objects.end());
+  std::erase_if(tanks, [](const auto &tank) { return tank->step(); });
   ++time;
 }
 

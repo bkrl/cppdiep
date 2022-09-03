@@ -19,9 +19,9 @@ int main() {
   settings.antialiasingLevel = 4;
   sf::RenderWindow window(sf::VideoMode(800, 800), "CppDiep",
                           sf::Style::Titlebar | sf::Style::Close, settings);
-  constexpr int frame_rate = 60;
+  constexpr auto frame_rate = 60;
   window.setFramerateLimit(frame_rate);
-  constexpr float arena_size = 20.f;
+  constexpr auto arena_size = 20.f;
   // The Y size of the view is negative to flip things vertically since SFML
   // uses a downwards vertical axis while the arena uses an upwards vertical
   // axis.
@@ -31,14 +31,14 @@ int main() {
 
   // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  const std::weak_ptr tank =
+  const auto tank =
       arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
           b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
   arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
   while (window.isOpen()) {
-    const std::shared_ptr locked_tank = tank.lock();
+    const auto locked_tank = tank.lock();
     if (!locked_tank) {
       // Tank has been destroyed.
       window.close();

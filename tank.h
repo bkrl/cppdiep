@@ -38,7 +38,7 @@ public:
   /// Get the direction of the tank's target relative to the tank.
   /// @return The direction of the tank's target as an angle in radians.
   float getTargetAngle() const {
-    b2Vec2 target = getTarget();
+    auto target = getTarget();
     return std::atan2(target.y, target.x);
   }
 
