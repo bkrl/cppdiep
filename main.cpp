@@ -39,16 +39,13 @@ int main() {
 
   while (window.isOpen()) {
     const auto locked_tank = tank.lock();
-    if (!locked_tank) {
-      // Tank has been destroyed.
-      window.close();
-      break;
-    }
 
     // Make the tank cannon point towards the mouse.
-    const b2Vec2 mouse_position = cppdiep::toB2Vec2(
-        window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-    locked_tank->setTarget(mouse_position - locked_tank->getPosition());
+    if (locked_tank) {
+      const b2Vec2 mouse_position = cppdiep::toB2Vec2(
+          window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+      locked_tank->setTarget(mouse_position - locked_tank->getPosition());
+    }
 
     // Process events.
     sf::Event event;
@@ -56,21 +53,24 @@ int main() {
       if (event.type == sf::Event::Closed) {
         window.close();
       } else if (event.type == sf::Event::MouseButtonPressed &&
-                 event.mouseButton.button == sf::Mouse::Left) {
+                 event.mouseButton.button == sf::Mouse::Left && locked_tank) {
         locked_tank->fire();
       }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-      locked_tank->move(b2Vec2(0.f, 1.f));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-      locked_tank->move(b2Vec2(-1.f, 0.f));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-      locked_tank->move(b2Vec2(0.f, -1.f));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-      locked_tank->move(b2Vec2(1.f, 0.f));
+
+    if (locked_tank) {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        locked_tank->move(b2Vec2(0.f, 1.f));
+      }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        locked_tank->move(b2Vec2(-1.f, 0.f));
+      }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        locked_tank->move(b2Vec2(0.f, -1.f));
+      }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        locked_tank->move(b2Vec2(1.f, 0.f));
+      }
     }
 
     arena.step();
