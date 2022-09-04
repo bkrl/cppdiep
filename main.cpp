@@ -12,6 +12,7 @@
 #include "basic_tank.h"
 #include "external_control_tank.h"
 #include "render_utils.h"
+#include "simple_ai_tank.h"
 
 int main() {
   // Set up the window.
@@ -31,22 +32,27 @@ int main() {
 
   // Create the arena and spawn two tanks for testing.
   cppdiep::Arena arena(arena_size, 1.f / frame_rate);
-  const auto tank =
+  const auto player_tank =
       arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
-          b2Vec2(0.f, 0.f), 1.f, cppdiep::colors::BLUE);
-  arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
-      b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
+          b2Vec2(7.5f, 7.5f), 1.f, cppdiep::colors::BLUE);
+  const auto enemy_tank =
+      arena.spawn<cppdiep::SimpleAITank<cppdiep::BasicTank>>(
+          b2Vec2(-7.5f, -7.5f), 1.f, cppdiep::colors::RED);
+  if (auto locked_enemy_tank = enemy_tank.lock()) {
+    locked_enemy_tank->setTargetObject(player_tank);
+  }
 
   auto auto_firing = false;
 
   while (window.isOpen()) {
-    const auto locked_tank = tank.lock();
+    const auto locked_player_tank = player_tank.lock();
 
     // Make the tank cannon point towards the mouse.
-    if (locked_tank) {
+    if (locked_player_tank) {
       const b2Vec2 mouse_position = cppdiep::toB2Vec2(
           window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-      locked_tank->setTarget(mouse_position - locked_tank->getPosition());
+      locked_player_tank->setTarget(mouse_position -
+                                    locked_player_tank->getPosition());
     }
 
     // Process events.
@@ -57,8 +63,8 @@ int main() {
         window.close();
         break;
       case sf::Event::MouseButtonPressed:
-        if (event.mouseButton.button == sf::Mouse::Left && locked_tank) {
-          locked_tank->fire();
+        if (event.mouseButton.button == sf::Mouse::Left && locked_player_tank) {
+          locked_player_tank->fire();
         }
         break;
       case sf::Event::KeyPressed:
@@ -70,22 +76,22 @@ int main() {
       }
     }
 
-    if (locked_tank) {
+    if (locked_player_tank) {
       if (auto_firing) {
-        locked_tank->fire();
+        locked_player_tank->fire();
       }
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        locked_tank->move(b2Vec2(0.f, 1.f));
+        locked_player_tank->move(b2Vec2(0.f, 1.f));
       }
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        locked_tank->move(b2Vec2(-1.f, 0.f));
+        locked_player_tank->move(b2Vec2(-1.f, 0.f));
       }
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        locked_tank->move(b2Vec2(0.f, -1.f));
+        locked_player_tank->move(b2Vec2(0.f, -1.f));
       }
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        locked_tank->move(b2Vec2(1.f, 0.f));
+        locked_player_tank->move(b2Vec2(1.f, 0.f));
       }
     }
 
