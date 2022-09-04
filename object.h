@@ -73,6 +73,13 @@ protected:
   /// @copydoc getB2Body()
   const b2Body &getB2Body() const noexcept { return b2_body; }
 
+  /// Draw the object's health bar.
+  /// @param target the SFML render target to draw to.
+  /// @param distance the distance from the origin of the object to the health
+  /// bar.
+  void drawHealthBar(sf::RenderTarget &target, float width,
+                     float distance) const;
+
 private:
   friend Arena;
 

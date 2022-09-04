@@ -29,6 +29,12 @@ inline const sf::Color CANNON(153, 153, 153);
 /// Background color of the arena.
 inline const sf::Color BACKGROUND(205, 205, 205);
 
+/// Background color of health bars.
+inline const sf::Color HEALTH_BAR_BG(85, 85, 85);
+
+/// Foreground color of the health bars.
+inline const sf::Color HEALTH_BAR_FG(133, 227, 125);
+
 } // namespace colors
 
 /// The thickness of the outlines around the objects.

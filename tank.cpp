@@ -45,6 +45,9 @@ Tank::Tank(Arena &arena, const b2Vec2 &position, const float radius,
 void Tank::draw(sf::RenderTarget &target) const {
   drawCannons(target);
   drawCircle(target, getPosition(), getRadius(), getColor());
+  if (getHealth() < getMaxHealth()) {
+    drawHealthBar(target, getRadius() * 2.f, getRadius() * 1.25f);
+  }
 }
 
 void Tank::drawCannon(sf::RenderTarget &target, const float length,
