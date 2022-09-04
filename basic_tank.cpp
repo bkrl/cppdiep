@@ -1,5 +1,7 @@
 #include "basic_tank.h"
 
+#include <cmath>
+
 #include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -13,6 +15,11 @@ void BasicTank::drawCannons(sf::RenderTarget &target) const {
 }
 
 void BasicTank::fire() {
+  if (getArena().getTime() < reload_complete_time) {
+    return;
+  }
+  const auto reload_time = std::round(1.f / getArena().getTimeStep());
+  reload_complete_time = getArena().getTime() + reload_time;
   b2Vec2 target_vec = getTarget();
   target_vec.Normalize();
   const auto bullet_radius = getRadius() / 2.f;

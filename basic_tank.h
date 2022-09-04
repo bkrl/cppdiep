@@ -7,6 +7,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "tank.h"
+#include "time.h"
 
 namespace cppdiep {
 
@@ -23,6 +24,9 @@ protected:
 private:
   void drawCannons(sf::RenderTarget &target) const override;
   float getMoveForce() const noexcept override { return 15.f * getRadius(); }
+
+  /// Time when the tank can fire again.
+  Time reload_complete_time = 0;
 };
 
 } // namespace cppdiep
