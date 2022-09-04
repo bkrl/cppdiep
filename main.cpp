@@ -37,6 +37,8 @@ int main() {
   arena.spawn<cppdiep::ExternalControlTank<cppdiep::BasicTank>>(
       b2Vec2(0.f, 5.f), 1.f, cppdiep::colors::RED);
 
+  auto auto_firing = false;
+
   while (window.isOpen()) {
     const auto locked_tank = tank.lock();
 
@@ -59,11 +61,20 @@ int main() {
           locked_tank->fire();
         }
         break;
+      case sf::Event::KeyPressed:
+        if (event.key.code == sf::Keyboard::E) {
+          auto_firing = !auto_firing;
+        }
+        break;
       default:;
       }
     }
 
     if (locked_tank) {
+      if (auto_firing) {
+        locked_tank->fire();
+      }
+
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         locked_tank->move(b2Vec2(0.f, 1.f));
       }
