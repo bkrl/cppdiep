@@ -56,7 +56,7 @@ void Tank::drawCannon(sf::RenderTarget &target, const float length,
   cannon_shape.setOrigin(0.f, width / 2.f);
   cannon_shape.setPosition(toSfVector2f(getPosition()));
   cannon_shape.setFillColor(colors::CANNON);
-  cannon_shape.setOutlineThickness(OUTLINE_THICKNESS);
+  cannon_shape.setOutlineThickness(-OUTLINE_THICKNESS);
   cannon_shape.setOutlineColor(darken(colors::CANNON));
   cannon_shape.setRotation(radiansToDegrees(angle));
   target.draw(cannon_shape);
