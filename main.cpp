@@ -50,11 +50,16 @@ int main() {
     // Process events.
     sf::Event event;
     while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
+      switch (event.type) {
+      case sf::Event::Closed:
         window.close();
-      } else if (event.type == sf::Event::MouseButtonPressed &&
-                 event.mouseButton.button == sf::Mouse::Left && locked_tank) {
-        locked_tank->fire();
+        break;
+      case sf::Event::MouseButtonPressed:
+        if (event.mouseButton.button == sf::Mouse::Left && locked_tank) {
+          locked_tank->fire();
+        }
+        break;
+      default:;
       }
     }
 
