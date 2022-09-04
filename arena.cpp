@@ -41,6 +41,9 @@ void Arena::ContactListener::PostSolve(b2Contact *const contact,
                       impulse->normalImpulses + impulse->count, 0.f),
       std::accumulate(impulse->tangentImpulses,
                       impulse->tangentImpulses + impulse->count, 0.f));
+  // Box2D sometimes reports contacts with zero impulse and damage animations
+  // might be added in the future so we don't want to call Object::damage() if
+  // the impulse is zero.
   if (impulse_magnitude > 0.f) {
     object_a->damage(impulse_magnitude);
     object_b->damage(impulse_magnitude);
