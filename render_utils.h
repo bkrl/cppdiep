@@ -31,9 +31,8 @@ inline const sf::Color BACKGROUND(205, 205, 205);
 
 } // namespace colors
 
-/// The thickness of the outlines around the objects. This is negative to make
-/// the outline inside the edge of the object.
-inline constexpr float OUTLINE_THICKNESS = -0.125f;
+/// The thickness of the outlines around the objects.
+inline constexpr float OUTLINE_THICKNESS = 0.125f;
 
 /// Darken a color to get the color of the outline.
 /// @param color the color to darken.
@@ -53,7 +52,7 @@ inline void drawCircle(sf::RenderTarget &target, const b2Vec2 &position,
   shape.setOrigin(radius, radius);
   shape.setPosition(position.x, position.y);
   shape.setFillColor(color);
-  shape.setOutlineThickness(OUTLINE_THICKNESS);
+  shape.setOutlineThickness(-OUTLINE_THICKNESS);
   shape.setOutlineColor(darken(color));
   target.draw(shape);
 }
