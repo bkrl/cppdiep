@@ -21,10 +21,13 @@ class SimpleAITank final : public BaseTank {
 public:
   using BaseTank::BaseTank;
 
+  /// Set the object that this tank will target.
+  /// @param target_object a weak pointer to the target object.
   void setTargetObject(std::weak_ptr<Object> target_object) {
     this->target_object = std::move(target_object);
   }
 
+  /// @copydoc Tank::getTarget()
   b2Vec2 getTarget() const override {
     if (auto locked_target_object = target_object.lock()) {
       return locked_target_object->getPosition() - this->getPosition();
@@ -34,6 +37,7 @@ public:
   }
 
 protected:
+  /// @copydoc Tank::step()
   bool step() override {
     if (BaseTank::step()) {
       return true;
@@ -49,6 +53,7 @@ protected:
   }
 
 private:
+  /// A weak pointer to the object that this tank attempts to destroy.
   std::weak_ptr<Object> target_object;
 };
 

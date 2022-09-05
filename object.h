@@ -75,6 +75,7 @@ protected:
 
   /// Draw the object's health bar.
   /// @param target the SFML render target to draw to.
+  /// @param width the width of the health bar.
   /// @param distance the distance from the origin of the object to the health
   /// bar.
   void drawHealthBar(sf::RenderTarget &target, float width,
