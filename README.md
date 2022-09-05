@@ -9,7 +9,7 @@ It might have been better to write this with the ECS pattern instead of OOP but 
 Building this project requires Box2D 2.3 (not 2.4, which changed header names) and SFML 2.5.
 Commands for Debian 11:
 ```bash
-sudo apt install g++ make cmake libbox2d-dev libsfml-dev
+sudo apt install git g++ make cmake libbox2d-dev libsfml-dev
 git clone https://github.com/bkrl/cppdiep.git && cd cppdiep
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
