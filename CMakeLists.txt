@@ -28,6 +28,23 @@ find_package(
   REQUIRED)
 find_package(box2d 2.4.1 REQUIRED)
 
-add_executable(cppdiep arena.cpp basic_tank.cpp bullet.cpp main.cpp object.cpp
-                       tank.cpp)
+add_executable(cppdiep
+  arena.cpp
+  arena.fwd.h
+  arena.h
+  basic_tank.cpp
+  basic_tank.h
+  box2d_categories.h
+  bullet.cpp
+  bullet.h
+  external_control_tank.h
+  main.cpp
+  object.cpp
+  object.h
+  render_utils.h
+  simple_ai_tank.h
+  tank.cpp
+  tank.fwd.h
+  tank.h
+  time.h)
 target_link_libraries(cppdiep PRIVATE sfml-graphics box2d)
