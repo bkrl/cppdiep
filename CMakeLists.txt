@@ -26,9 +26,8 @@ find_package(
   SFML 2.5
   COMPONENTS graphics
   REQUIRED)
-# Box2D 2.3 is required but its CMake config doesn't set the version properly.
-find_package(Box2D REQUIRED)
+find_package(box2d 2.4.1 REQUIRED)
 
 add_executable(cppdiep arena.cpp basic_tank.cpp bullet.cpp main.cpp object.cpp
                        tank.cpp)
-target_link_libraries(cppdiep PRIVATE sfml-graphics Box2D)
+target_link_libraries(cppdiep PRIVATE sfml-graphics box2d)

@@ -8,13 +8,13 @@
 
 #include <cmath>
 
-#include <Box2D/Collision/Shapes/b2Shape.h>
-#include <Box2D/Common/b2Math.h>
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Dynamics/b2World.h>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_body.h>
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_math.h>
+#include <box2d/b2_shape.h>
+#include <box2d/b2_world.h>
 
 #include "arena.fwd.h"
 #include "object.h"

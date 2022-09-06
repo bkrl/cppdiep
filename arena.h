@@ -13,13 +13,13 @@
 #include <utility>
 #include <vector>
 
-#include <Box2D/Common/b2Math.h>
-#include <Box2D/Dynamics/Contacts/b2Contact.h>
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Dynamics/b2World.h>
-#include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_contact.h>
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_math.h>
+#include <box2d/b2_world.h>
+#include <box2d/b2_world_callbacks.h>
 
 #include "bullet.h"
 #include "tank.h"

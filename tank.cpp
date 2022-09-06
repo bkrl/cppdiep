@@ -1,14 +1,16 @@
 #include "tank.h"
 
-#include <Box2D/Collision/Shapes/b2CircleShape.h>
-#include <Box2D/Common/b2Math.h>
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Dynamics/b2World.h>
+#include <cstdint>
+
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_body.h>
+#include <box2d/b2_circle_shape.h>
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_math.h>
+#include <box2d/b2_world.h>
 
 #include "arena.h"
 #include "box2d_categories.h"
@@ -22,7 +24,7 @@ b2BodyDef Tank::makeB2BodyDef(const b2Vec2 &position) {
   body_def.position = position;
   body_def.fixedRotation = true;
   body_def.linearDamping = 1.f;
-  body_def.userData = this;
+  body_def.userData.pointer = reinterpret_cast<std::uintptr_t>(this);
   return body_def;
 }
 

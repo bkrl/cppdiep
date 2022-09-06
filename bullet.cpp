@@ -1,9 +1,11 @@
 #include "bullet.h"
 
-#include <Box2D/Collision/Shapes/b2CircleShape.h>
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2World.h>
+#include <cstdint>
+
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_body.h>
+#include <box2d/b2_circle_shape.h>
+#include <box2d/b2_world.h>
 
 #include "arena.h"
 #include "box2d_categories.h"
@@ -20,7 +22,7 @@ b2BodyDef Bullet::makeB2BodyDef(const b2Vec2 &position,
   body_def.linearDamping = 0.5f;
   body_def.angularDamping = 0.5f;
   body_def.bullet = true;
-  body_def.userData = this;
+  body_def.userData.pointer = reinterpret_cast<std::uintptr_t>(this);
   return body_def;
 }
 

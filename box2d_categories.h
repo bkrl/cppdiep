@@ -4,7 +4,7 @@
 /// @file
 /// Box2D collision category constants.
 
-#include <Box2D/Common/b2Settings.h>
+#include <box2d/b2_types.h>
 
 namespace cppdiep {
 

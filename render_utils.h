@@ -6,11 +6,11 @@
 
 #include <numbers>
 
-#include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <box2d/b2_math.h>
 
 namespace cppdiep {
 

@@ -10,14 +10,14 @@
 #include <utility>
 #include <vector>
 
-#include <Box2D/Collision/Shapes/b2ChainShape.h>
-#include <Box2D/Common/b2Math.h>
-#include <Box2D/Dynamics/Contacts/b2Contact.h>
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Dynamics/b2World.h>
-#include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_body.h>
+#include <box2d/b2_chain_shape.h>
+#include <box2d/b2_contact.h>
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_math.h>
+#include <box2d/b2_world.h>
+#include <box2d/b2_world_callbacks.h>
 
 #include "box2d_categories.h"
 #include "bullet.h"
@@ -29,10 +29,10 @@ namespace cppdiep {
 
 void Arena::ContactListener::PostSolve(b2Contact *const contact,
                                        const b2ContactImpulse *const impulse) {
-  const auto object_a =
-      static_cast<Object *>(contact->GetFixtureA()->GetBody()->GetUserData());
-  const auto object_b =
-      static_cast<Object *>(contact->GetFixtureB()->GetBody()->GetUserData());
+  const auto object_a = reinterpret_cast<Object *>(
+      contact->GetFixtureA()->GetBody()->GetUserData().pointer);
+  const auto object_b = reinterpret_cast<Object *>(
+      contact->GetFixtureB()->GetBody()->GetUserData().pointer);
   if (!object_a || !object_b) {
     return;
   }
@@ -55,8 +55,8 @@ Arena::Arena(const float size, const float time_step) : time_step(time_step) {
   b2BodyDef border_body_def;
   b2Body &border_body = *b2_world.CreateBody(&border_body_def);
   std::array border_vertices = {
-      b2Vec2(size / 2.f, size / 2.f), b2Vec2(-size / 2.f, size / 2.f),
-      b2Vec2(-size / 2.f, -size / 2.f), b2Vec2(size / 2.f, -size / 2.f)};
+      b2Vec2(size / 2.f, size / 2.f), b2Vec2(size / 2.f, -size / 2.f),
+      b2Vec2(-size / 2.f, -size / 2.f), b2Vec2(-size / 2.f, size / 2.f)};
   b2ChainShape border_chain;
   border_chain.CreateLoop(border_vertices.data(), border_vertices.size());
   b2FixtureDef border_fixture_def;

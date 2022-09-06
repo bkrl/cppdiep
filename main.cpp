@@ -1,12 +1,12 @@
 #include <memory>
 
-#include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Window/ContextSettings.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <box2d/b2_math.h>
 
 #include "arena.h"
 #include "basic_tank.h"

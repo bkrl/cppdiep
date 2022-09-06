@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-#include <Box2D/Common/b2Math.h>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <box2d/b2_math.h>
 
 #include "arena.h"
 #include "bullet.h"
