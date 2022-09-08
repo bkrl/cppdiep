@@ -61,7 +61,6 @@ Arena::Arena(const float size, const float time_step) : time_step(time_step) {
   border_chain.CreateLoop(border_vertices.data(), border_vertices.size());
   b2FixtureDef border_fixture_def;
   border_fixture_def.shape = &border_chain;
-  border_fixture_def.friction = 0.25f;
   border_fixture_def.restitution = 0.25f;
   border_fixture_def.filter.categoryBits = box2d_categories::BORDER;
   border_fixture_def.filter.maskBits = box2d_categories::TANK;
