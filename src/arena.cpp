@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Alexander Zhang <alex@alexyzhang.dev>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 #include "arena.h"
 
 #include <algorithm>
