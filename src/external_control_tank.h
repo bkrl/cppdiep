@@ -38,7 +38,7 @@ public:
   void setTarget(const b2Vec2 &target) noexcept { this->target = target; }
 
   /// Fire the tank's cannon(s).
-  void fire() { BaseTank::fire(); }
+  void fire() override { BaseTank::fire(); }
 
 private:
   /// The current target point of the tank.
