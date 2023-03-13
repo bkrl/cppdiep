@@ -26,5 +26,4 @@ make -j $(nproc)
 You control the blue tank and try to kill the red tank, which will automatically shoot at you and move towards you.
 Move with the WASD keys and aim with the mouse.
 Left click to fire or press E to toggle automatic firing.
-
-Demo: https://cppdiep.alexyzhang.dev/cppdiep.mp4
+See demo.mp4 for an example of what it looks like.
