@@ -8,7 +8,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 This is a very simple 2D game based on [Diep.io](https://diep.io/).
 It is a personal project originally intended to be used as a reinforcement learning environment.
-It might have been better to write this with the ECS pattern instead of OOP but I didn't know about ECS when I started this project.
 
 ## Building
 
