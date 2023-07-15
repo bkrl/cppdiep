@@ -15,7 +15,7 @@ Building this project requires Box2D 2.4.1 and SFML 2.5.
 Commands for Fedora 36:
 ```bash
 sudo dnf install git gcc-c++ make cmake Box2D-devel SFML-devel
-git clone https://codeberg.org/alexyz/cppdiep.git && cd cppdiep
+git clone https://github.com/bkrl/cppdiep.git && cd cppdiep
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j $(nproc)
